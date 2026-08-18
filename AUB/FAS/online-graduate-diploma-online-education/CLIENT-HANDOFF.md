@@ -47,9 +47,12 @@ None of these are technical. Each one is currently a visible gap on the page.
 - [ ] **One or two graduate testimonials**, each with a name and a job title.
       **These must not go live as they are** — they currently read
       "[TESTIMONIAL — student quote to be supplied by AUB]" and would publish as that text.
-- [ ] **A sharing image**, 1200 × 630 pixels. This is the picture that appears when someone
-      posts the page link on LinkedIn or WhatsApp. Without it, shared links show a plain
-      grey box.
+
+**The sharing image is done** — we built it from the same educator and MCE badge photo used
+on the cold-audience page, so nothing is needed from you. Your web team only has to upload
+`assets/og-image-1200x630.jpg` and it will appear whenever anyone shares a page link.
+
+---
 
 ## Section B — Decisions and confirmations we need
 
@@ -136,7 +139,8 @@ checked any earlier, which is why they are separated out.
 - [ ] **Check the AUB logo appears in the browser tab.** This depends on the icon files being
       placed correctly by your web team, and it will look broken until they are.
 - [ ] **Post a page link into LinkedIn or WhatsApp** and check the preview shows the right
-      title, description and image.
+      title, description and image. *The image is supplied; this confirms your web team
+      uploaded it and pointed the page at it.*
 - [ ] **Open all three pages on a real phone**, not just a desktop browser. The majority of
       your traffic will be mobile.
 - [ ] **Click every button and link**, including the three footer policy links, the factsheet

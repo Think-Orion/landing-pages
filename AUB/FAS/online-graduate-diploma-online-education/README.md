@@ -208,6 +208,13 @@ The decoded originals are extracted and ready to upload to a CDN:
 |---|---|---|
 | `assets/premise-educator-mce-badge-800x800.jpg` | 54KB | Premise section composite (includes the MCE badge) |
 | `assets/advisor-mike-220x211.jpg` | 6KB | Advisor portrait |
+| `assets/og-image-1200x630.jpg` | 55KB | Social sharing image for both landing pages |
+
+The sharing image was built from the 800×800 educator/MCE photo: scaled to 630px and centred
+on a 1200×630 canvas filled with the photo's own flat background colour (`#8A0437`), so the
+join is invisible and nothing was upscaled. Both landing pages reference it by filename in
+their commented-out `og:image` tags; only the live domain is outstanding. The thank-you page
+has no Open Graph tags by design and does not use it.
 
 Both `<img>` tags now carry `loading="lazy"`, `decoding="async"` and intrinsic
 `width`/`height`. Neither is the LCP element — the hero is type and a form, no image —

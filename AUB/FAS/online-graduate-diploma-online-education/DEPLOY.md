@@ -16,6 +16,7 @@ Applies to **all three pages** unless noted.
 | `Thank_You_dc.html` | Post-submission page |
 | `assets/Graduate_diploma_in_online_education_factsheet_2025.pdf` | Keep it reachable from the thank-you page — see §10 |
 | `assets/favicon/*` | **Web root** of the serving domain — not next to the page |
+| `assets/og-image-1200x630.jpg` | Host it — the social sharing image for both landing pages |
 | `assets/premise-educator-mce-badge-800x800.jpg` | Optional: host it and swap the data URI (see §5) |
 | `assets/advisor-mike-220x211.jpg` | Optional: same |
 
@@ -57,7 +58,7 @@ handoff. Search for `REPLACE-WITH-LIVE-URL` in the HTML. Uncomment each and fill
 |---|---|
 | `<link rel="canonical">` | This page's final absolute URL |
 | `og:url` | Same value as canonical |
-| `og:image` | Absolute URL to a hosted **1200×630** JPG or PNG |
+| `og:image` | Absolute URL to the supplied `og-image-1200x630.jpg` once hosted |
 | `twitter:image` | Same value as og:image |
 
 Also uncomment `og:image:width`, `og:image:height` and `og:image:alt` alongside `og:image`.
@@ -69,6 +70,13 @@ one, so nothing can ship broken by accident.
 
 `og:image` must be an **absolute URL**. Relative paths and data URIs do not work — social
 crawlers fetch it independently of the page.
+
+**The image itself is supplied:** `assets/og-image-1200x630.jpg`, 55KB. It was built from the
+same educator and MCE badge photo used on the cold-audience page — the 800×800 source scaled to
+630px and centred on a 1200×630 canvas filled with the photo's own background colour
+(`#8A0437`), so the join is seamless and nothing was upscaled. Both landing pages already
+reference it by that filename; only the domain is missing. The thank-you page carries no Open
+Graph tags by design, so it does not use it.
 
 ---
 
