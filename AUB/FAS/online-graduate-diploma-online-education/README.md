@@ -35,10 +35,10 @@ Added to the `<helmet>` block (which is what DC injects into the production `<he
 | Tag | State |
 |---|---|
 | `robots` | `index, follow, max-image-preview:large` — this page carries its own FAQPage schema targeting cold-stage long-tail queries, so it is meant to be indexed. **The Thank You page must be `noindex, follow` instead.** |
-| `canonical` | `[CANONICAL URL]` placeholder — needs the live URL |
+| `canonical` | **Commented out.** The live URL is unknown at handoff, and a canonical pointing at a placeholder can misdirect indexing, whereas an absent one is safe. Uncomment and fill before launch. |
 | Favicon | Wired to **root-relative** paths (`/favicon.ico`, `/favicon-32x32.png`, `/favicon-16x16.png`, `/apple-touch-icon.png`, `/site.webmanifest`) plus `<meta name="theme-color" content="#8B1333">`. See "Favicon deployment" below. |
-| Open Graph | Complete (`og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description`, `og:url`, `og:image` + width/height/alt). `og:url` and `og:image` are placeholders. |
-| Twitter card | `summary_large_image`, sharing the OG title/description/image |
+| Open Graph | `og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description` are live. `og:url`, `og:image` and its width/height/alt are **commented out** pending the live URL — a broken `og:image` renders social shares as a blank card. |
+| Twitter card | `summary_large_image` with title and description live; `twitter:image` commented out with `og:image`. |
 | GTM | **Live.** Stape server-side container `GTM-KZDZDJJ`, loaded first-party from `trk.aub.edu.lb`. See "Tag Manager" below. |
 
 #### Favicon deployment
@@ -156,7 +156,15 @@ render only inside the DC preview:
 Replace each `<image-slot>` with a plain `<img>` once the real photo exists — `image-slot`
 elements are invisible in a raw browser.
 
-### Open client-fill items
+### Handoff
+
+`DEPLOY.md` is the client-facing deployment checklist — favicon placement, the four
+commented-out URL tags, footer policy links, the Vala form wiring, and what to strip
+before launch. Hand it over with the page.
+
+Search the HTML for `REPLACE-WITH-LIVE-URL` to find every tag awaiting the live URL.
+
+## Open client-fill items
 
 The full list lives in the comment block at the top of `Cold_Audience_dc.html`. Headlines:
 

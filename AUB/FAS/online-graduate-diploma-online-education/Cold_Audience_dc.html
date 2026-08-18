@@ -24,7 +24,14 @@
        long-tail queries, so it is meant to be indexed. The Thank You page must be
        noindex instead. -->
   <meta name="robots" content="index, follow, max-image-preview:large" />
-  <link rel="canonical" href="[CANONICAL URL — live URL of this page, e.g. https://online.aub.edu.lb/online-education-diploma/]" />
+  <!-- ============================================================================
+       CANONICAL — COMMENTED OUT ON PURPOSE. UNCOMMENT AND FILL BEFORE GOING LIVE.
+       The live URL is not known at handoff. A canonical tag pointing at a literal
+       placeholder is WORSE than no canonical tag at all: it can misdirect indexing.
+       Omitting it is safe — search engines self-canonicalise to the page's own URL.
+       Replace the href with this page's final URL, then uncomment.
+       ============================================================================ -->
+  <!-- <link rel="canonical" href="https://REPLACE-WITH-LIVE-URL/" /> -->
 
   <!-- Favicon. Paths are root-relative because browsers resolve icons against the
        DOMAIN ROOT, not the page path: every file below must be deployed to the web
@@ -43,15 +50,20 @@
   <meta property="og:locale" content="en_US" />
   <meta property="og:title" content="Become a confident, certified online educator" />
   <meta property="og:description" content="Our Graduate Diploma in Online Education: 12 credits, 4 courses, 100% online. Includes the Microsoft Certified Educator certification at no extra cost." />
-  <meta property="og:url" content="[CANONICAL URL — same value as the canonical tag above]" />
-  <meta property="og:image" content="[OG IMAGE URL — hosted 1200x630 JPG or PNG]" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="AUB Graduate Diploma in Online Education" />
+  <!-- og:url and og:image need absolute URLs, which are unknown at handoff.
+       Commented out so a placeholder can never ship: a broken og:image makes social
+       shares render as a blank card, which is worse than no image tag at all.
+       Uncomment and fill both before going live. og:image must be an absolute URL
+       to a hosted 1200x630 JPG or PNG — relative paths and data URIs do not work. -->
+  <!-- <meta property="og:url" content="https://REPLACE-WITH-LIVE-URL/" /> -->
+  <!-- <meta property="og:image" content="https://REPLACE-WITH-LIVE-URL/og-image.jpg" /> -->
+  <!-- <meta property="og:image:width" content="1200" /> -->
+  <!-- <meta property="og:image:height" content="630" /> -->
+  <!-- <meta property="og:image:alt" content="AUB Graduate Diploma in Online Education" /> -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Become a confident, certified online educator" />
   <meta name="twitter:description" content="Our Graduate Diploma in Online Education: 12 credits, 4 courses, 100% online. Includes the Microsoft Certified Educator certification at no extra cost." />
-  <meta name="twitter:image" content="[OG IMAGE URL — same value as og:image above]" />
+  <!-- <meta name="twitter:image" content="https://REPLACE-WITH-LIVE-URL/og-image.jpg" /> -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -99,7 +111,7 @@
      Advisor photo and premise image are embedded in this file as data URIs (client-supplied) — swap to hosted files at launch. Remaining image-slot elements (faculty portraits) only render inside the DC preview.
      Premise image hot-linked from online.aub.edu.lb — same note on hosting
      A standalone script before </body> replicates sticky/FAQ/CTA behavior for review outside the DC runtime — remove it once DC wiring is live
-     Head tags added with placeholders that must be filled before launch: canonical URL, og:url, og:image (hosted 1200x630)
+     canonical, og:url, og:image and twitter:image are COMMENTED OUT because the live URL is unknown at handoff. Uncomment and fill all four before going live — see DEPLOY.md. A broken canonical or og:image is worse than an absent one
      Favicon links are wired to root-relative paths. Deploy favicon.ico, favicon-32x32.png, favicon-16x16.png, apple-touch-icon.png, android-chrome-192x192.png, android-chrome-512x512.png and site.webmanifest to the WEB ROOT of the serving domain
      site.webmanifest is in assets/favicon/. Its name/short_name arrived empty from the generator and are now filled. Its theme_color is still the generator default #ffffff — consider AUB burgundy #8B1333 to match the meta theme-color
      Footer legal links added as placeholders: privacy policy, terms of use, non-discrimination. Link AUB's own existing policies — required at the point of data collection and for Google Ads lead-gen approval
