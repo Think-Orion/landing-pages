@@ -1,9 +1,26 @@
-# AUB — FAS — Online Graduate Diploma in Online Education — Cold Audience LP
+# Online Graduate Diploma in Online Education
 
-Long-form cold-audience landing page, built from Think Orion's `Cold_Audience_dc.html`
-DC template. Single self-contained file: `Cold_Audience_dc.html`.
+**Client:** AUB · **Faculty:** FAS (Faculty of Arts and Sciences)
 
-## What's in the file
+Landing pages for this program. Assets in `assets/` are shared across all three.
+
+| Page | File | Status | Indexing |
+|---|---|---|---|
+| Cold audience | `Cold_Audience_dc.html` | ✅ built | `index, follow` |
+| In-market hero form | `In-Market_Hero_Form_dc.html` | not yet added | `index, follow` |
+| Thank you | `Thank_You_dc.html` | not yet added | **`noindex, follow`** |
+
+Cold and in-market pages must not share an FAQ set — duplicate `FAQPage` JSON-LD on
+one domain splits search signals.
+
+---
+
+## Cold audience page
+
+Long-form cold-audience LP, built from Think Orion's `Cold_Audience_dc.html` DC
+template. Single self-contained file.
+
+### What's in the file
 
 - 7-question FAQ with matching `FAQPage` JSON-LD (visible text and schema are verbatim-identical).
 - Two Vala form hosts: `#vala-funnel` (hero) and `#vala-funnel-2` (advisor section).
@@ -11,7 +28,7 @@ DC template. Single self-contained file: `Cold_Audience_dc.html`.
 - A standalone `<script>` before `</body>` replicates sticky-CTA / FAQ / CTA-scroll /
   slider behaviour for review outside the DC runtime. Remove once DC wiring is live.
 
-## Head, indexing and tracking
+### Head, indexing and tracking
 
 Added to the `<helmet>` block (which is what DC injects into the production `<head>`):
 
@@ -24,7 +41,7 @@ Added to the `<helmet>` block (which is what DC injects into the production `<he
 | Twitter card | `summary_large_image`, sharing the OG title/description/image |
 | GTM | `window.dataLayer` initialised live. The loader snippet is **present but commented out** — a placeholder container ID would fire a 404 on every page view. Supply the real ID, uncomment, and add the matching `<noscript>` iframe as the first element in `<body>`. |
 
-## Assets
+### Assets
 
 Both photos are still embedded as base64 data URIs, so the file reviews standalone
 with no external requests. They account for **~81KB — 52% of the file**; swapping
@@ -54,7 +71,7 @@ render only inside the DC preview:
 Replace each `<image-slot>` with a plain `<img>` once the real photo exists — `image-slot`
 elements are invisible in a raw browser.
 
-## Open client-fill items
+### Open client-fill items
 
 The full list lives in the comment block at the top of `Cold_Audience_dc.html`. Headlines:
 
@@ -74,7 +91,7 @@ The full list lives in the comment block at the top of `Cold_Audience_dc.html`. 
   Manno which one actually ships before deleting either — removing the wrong one breaks the
   DC preview.
 
-## QA status
+### QA status
 
 Rendered in Chromium at 1440×900 and 390×844: no horizontal overflow at either width
 (`scrollWidth == clientWidth`), tag balance clean, JSON-LD parses and all 7 Q&A pairs match
