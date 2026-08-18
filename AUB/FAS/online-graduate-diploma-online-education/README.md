@@ -56,12 +56,29 @@ below must be deployed to the web root of whatever domain serves this page:
 /site.webmanifest
 ```
 
-`assets/favicon/site.webmanifest` is the client-supplied manifest, with `name` and
-`short_name` filled in — they arrived empty from the favicon generator. Its
-`theme_color` is still the generator default `#ffffff`; consider changing it to AUB
-burgundy `#8B1333` to match the `theme-color` meta tag.
+All files live in `assets/favicon/` as the canonical copy. **The repo is not the web
+host** — committing them here does nothing for the live favicon. They have to be
+uploaded to the web root of whatever domain serves the page.
 
-**The icon PNG/ICO binaries are not yet in this repo** — still to be supplied.
+| File | Size | Notes |
+|---|---|---|
+| `favicon.ico` | 15KB | Bundles 16×16, 32×32, 48×48 |
+| `favicon-16x16.png` | 783B | Transparent — correct for browser tabs |
+| `favicon-32x32.png` | 2.4KB | Transparent — correct for browser tabs |
+| `apple-touch-icon.png` | 29KB | **Flattened onto white** — see below |
+| `apple-touch-icon-source-transparent.png` | 32KB | Original as supplied, kept for traceability. Not deployed. |
+| `android-chrome-192x192.png` | 35KB | Transparent — fine, Android composites onto `background_color` |
+| `android-chrome-512x512.png` | 49KB | Transparent — fine, same reason |
+| `site.webmanifest` | 392B | `name`/`short_name` filled in; arrived empty from the generator |
+
+**Why apple-touch-icon was flattened.** Every file in the supplied set is heavily
+transparent (the 180×180 was 85% transparent pixels). Browser tabs and Android handle
+that correctly, but **iOS ignores alpha on home-screen icons and composites them onto
+black** — the burgundy AUB seal would have shipped as a seal on a black square. The
+deployed file is now flattened onto white, matching how the seal appears on aub.edu.lb.
+
+`site.webmanifest`'s `theme_color` is still the generator default `#ffffff`; consider
+changing it to AUB burgundy `#8B1333` to match the `theme-color` meta tag.
 
 **Favicons will never appear in a raw/githack preview** served from a repo subfolder,
 because `/favicon.ico` resolves to the preview host's root. That is expected, not a bug —
@@ -126,7 +143,8 @@ The full list lives in the comment block at the top of `Cold_Audience_dc.html`. 
   belongs on a paid landing page.
 - Fill the `[CANONICAL URL]` and `[OG IMAGE URL]` placeholders; supply the GTM container ID
   and uncomment the loader.
-- Supply the favicon PNG/ICO binaries and deploy them, plus `site.webmanifest`, to the web root.
+- Deploy the `assets/favicon/` files to the web root of the serving domain (they are in the
+  repo, but the repo does not serve them). Use the flattened `apple-touch-icon.png`.
 - Supply AUB's privacy policy, terms of use and non-discrimination URLs for the footer links.
 - **Duplicate `viewport` meta is intentional for now.** One sits in the outer `<head>` beside
   `support.js` (the DC preview harness), one in `<helmet>` (the production head). Confirm with
