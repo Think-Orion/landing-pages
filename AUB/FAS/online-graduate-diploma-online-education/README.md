@@ -230,7 +230,11 @@ elements are invisible in a raw browser.
 
 Two documents, two audiences:
 
-- **`CLIENT-HANDOFF.md`** — for AUB marketing and admissions. Non-technical, plain language,
+- **`AUB-Online-Education-Launch-Checklist.docx`** — the client-facing checklist as a Word
+  document, brand-styled with tick boxes and tables. **This is the file to send to AUB.**
+  Generated from `CLIENT-HANDOFF.md`; if the content changes, regenerate rather than editing
+  both by hand.
+- **`CLIENT-HANDOFF.md`** — the same content in Markdown, for AUB marketing and admissions. Non-technical, plain language,
   organised as: content we need, decisions we need, connecting the leads to the CRM, checks
   that can only be done on a live URL, and what not to change. This is the one to send.
 - **`DEPLOY.md`** — for whoever deploys the pages — favicon placement, the four
