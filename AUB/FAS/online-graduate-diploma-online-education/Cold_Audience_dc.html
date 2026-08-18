@@ -17,10 +17,16 @@
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="[CANONICAL URL — live URL of this page, e.g. https://online.aub.edu.lb/online-education-diploma/]" />
 
-  <!-- Favicon — supply AUB's real icon files and host them alongside the page -->
-  <link rel="icon" href="[FAVICON URL — /favicon.ico]" sizes="any" />
-  <link rel="icon" href="[FAVICON URL — /favicon.svg]" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="[APPLE TOUCH ICON URL — 180x180 PNG]" />
+  <!-- Favicon. Paths are root-relative because browsers resolve icons against the
+       DOMAIN ROOT, not the page path: every file below must be deployed to the web
+       root of whatever domain serves this page. The icons will NOT appear in a
+       githack/raw preview from a repo subfolder — that is expected, not a bug. -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#8B1333" />
 
   <!-- Open Graph / Twitter — og:image must be a hosted 1200x630 file, not a data URI -->
   <meta property="og:type" content="website" />
@@ -90,7 +96,10 @@
      Advisor photo and premise image are embedded in this file as data URIs (client-supplied) — swap to hosted files at launch. Remaining image-slot elements (faculty portraits) only render inside the DC preview.
      Premise image hot-linked from online.aub.edu.lb — same note on hosting
      A standalone script before </body> replicates sticky/FAQ/CTA behavior for review outside the DC runtime — remove it once DC wiring is live
-     Head tags added with placeholders that must be filled before launch: canonical URL, og:url, favicon files, og:image (hosted 1200x630)
+     Head tags added with placeholders that must be filled before launch: canonical URL, og:url, og:image (hosted 1200x630)
+     Favicon links are wired to root-relative paths. Deploy favicon.ico, favicon-32x32.png, favicon-16x16.png, apple-touch-icon.png, android-chrome-192x192.png, android-chrome-512x512.png and site.webmanifest to the WEB ROOT of the serving domain
+     site.webmanifest is in assets/favicon/. Its name/short_name arrived empty from the generator and are now filled. Its theme_color is still the generator default #ffffff — consider AUB burgundy #8B1333 to match the meta theme-color
+     Footer legal links added as placeholders: privacy policy, terms of use, non-discrimination. Link AUB's own existing policies — required at the point of data collection and for Google Ads lead-gen approval
      GTM loader is present but commented out — supply the container ID, uncomment it, and add the matching <noscript> iframe as the first element in <body>
      robots is set to index,follow on this page. The Thank You page must be noindex,follow instead
      Duplicate viewport meta: one sits in the outer <head> next to support.js (DC preview harness), one in <helmet> (the production head). Confirm with Manno which one ships before deleting either — removing the wrong one breaks the DC preview
@@ -648,8 +657,22 @@
     </div>
   </section>
 
-  <footer style="background:#5E0C22;color:rgba(255,255,255,.6);text-align:center;padding:28px 20px;font-size:12.5px;line-height:1.7">
+  <!-- padding-bottom clears the sticky CTA bar, which otherwise sits over the legal
+       links at page bottom on mobile and makes the privacy link unclickable -->
+  <footer style="background:#5E0C22;color:rgba(255,255,255,.6);text-align:center;padding:28px 20px 104px;font-size:12.5px;line-height:1.7">
     <p>© 2026 American University of Beirut. Faculty of Arts and Sciences.<br />Bliss Street, Hamra, Beirut, Lebanon. <a href="https://www.aub.edu.lb" target="_blank" rel="noopener" style="color:rgba(255,255,255,.8);text-decoration:underline">aub.edu.lb</a></p>
+    <!-- Legal links. This page collects name, email and phone, so a privacy notice
+         must be reachable from the point of collection. Google Ads also requires
+         lead-gen destinations to disclose data practices — a missing privacy link is
+         a common disapproval cause on paid pages. Link AUB's OWN existing policies;
+         do not author new ones. -->
+    <p style="margin-top:12px">
+      <a href="[AUB PRIVACY POLICY URL]" target="_blank" rel="noopener" style="color:rgba(255,255,255,.8);text-decoration:underline">Privacy Policy</a>
+      <span style="opacity:.45;padding:0 8px">·</span>
+      <a href="[AUB TERMS OF USE URL]" target="_blank" rel="noopener" style="color:rgba(255,255,255,.8);text-decoration:underline">Terms of Use</a>
+      <span style="opacity:.45;padding:0 8px">·</span>
+      <a href="[AUB NON-DISCRIMINATION / ACCESSIBILITY URL]" target="_blank" rel="noopener" style="color:rgba(255,255,255,.8);text-decoration:underline">Non-Discrimination</a>
+    </p>
   </footer>
 
   <div data-sticky-cta style="position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;border-top:1px solid #E6E1DB;padding:12px clamp(16px,4vw,32px);display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 -6px 24px rgba(0,0,0,.1);transform:translateY(110%);transition:transform .3s ease">

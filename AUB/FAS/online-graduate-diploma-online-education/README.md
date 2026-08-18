@@ -36,12 +36,52 @@ Added to the `<helmet>` block (which is what DC injects into the production `<he
 |---|---|
 | `robots` | `index, follow, max-image-preview:large` — this page carries its own FAQPage schema targeting cold-stage long-tail queries, so it is meant to be indexed. **The Thank You page must be `noindex, follow` instead.** |
 | `canonical` | `[CANONICAL URL]` placeholder — needs the live URL |
-| Favicon | Three `[FAVICON URL]` placeholders (ico, svg, apple-touch-icon) |
+| Favicon | Wired to **root-relative** paths (`/favicon.ico`, `/favicon-32x32.png`, `/favicon-16x16.png`, `/apple-touch-icon.png`, `/site.webmanifest`) plus `<meta name="theme-color" content="#8B1333">`. See "Favicon deployment" below. |
 | Open Graph | Complete (`og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description`, `og:url`, `og:image` + width/height/alt). `og:url` and `og:image` are placeholders. |
 | Twitter card | `summary_large_image`, sharing the OG title/description/image |
 | GTM | `window.dataLayer` initialised live. The loader snippet is **present but commented out** — a placeholder container ID would fire a 404 on every page view. Supply the real ID, uncomment, and add the matching `<noscript>` iframe as the first element in `<body>`. |
 
-### Assets
+#### Favicon deployment
+
+Browsers resolve icon paths against the **domain root**, not the page path. Every file
+below must be deployed to the web root of whatever domain serves this page:
+
+```
+/favicon.ico
+/favicon-16x16.png
+/favicon-32x32.png
+/apple-touch-icon.png          (180x180)
+/android-chrome-192x192.png
+/android-chrome-512x512.png
+/site.webmanifest
+```
+
+`assets/favicon/site.webmanifest` is the client-supplied manifest, with `name` and
+`short_name` filled in — they arrived empty from the favicon generator. Its
+`theme_color` is still the generator default `#ffffff`; consider changing it to AUB
+burgundy `#8B1333` to match the `theme-color` meta tag.
+
+**The icon PNG/ICO binaries are not yet in this repo** — still to be supplied.
+
+**Favicons will never appear in a raw/githack preview** served from a repo subfolder,
+because `/favicon.ico` resolves to the preview host's root. That is expected, not a bug —
+verify on a real deployment.
+
+### Footer
+
+The footer carries the AUB copyright line, campus address, and links to **Privacy
+Policy**, **Terms of Use** and **Non-Discrimination** — URLs are placeholders pointing at
+AUB's own existing policies, which the client supplies. We link their policies; we do not
+author them.
+
+A privacy notice must be reachable from the point of data collection since this page
+takes name, email and phone. Google Ads also requires lead-gen destinations to disclose
+data practices, and a missing privacy link is a common disapproval cause on paid pages.
+
+The footer carries `padding-bottom:104px` so the sticky CTA bar cannot cover the legal
+links at page bottom — without it the privacy link was unclickable on mobile.
+
+## Assets
 
 Both photos are still embedded as base64 data URIs, so the file reviews standalone
 with no external requests. They account for **~81KB — 52% of the file**; swapping
@@ -84,8 +124,10 @@ The full list lives in the comment block at the top of `Cold_Audience_dc.html`. 
 - Confirm Microsoft brand-usage approval for the MCE badge.
 - Confirm the Lebanese MoE recognition wording (mirrors the client-reviewed email sequence)
   belongs on a paid landing page.
-- Fill the `[CANONICAL URL]`, `[FAVICON URL]` and `[OG IMAGE URL]` placeholders; supply the
-  GTM container ID and uncomment the loader.
+- Fill the `[CANONICAL URL]` and `[OG IMAGE URL]` placeholders; supply the GTM container ID
+  and uncomment the loader.
+- Supply the favicon PNG/ICO binaries and deploy them, plus `site.webmanifest`, to the web root.
+- Supply AUB's privacy policy, terms of use and non-discrimination URLs for the footer links.
 - **Duplicate `viewport` meta is intentional for now.** One sits in the outer `<head>` beside
   `support.js` (the DC preview harness), one in `<helmet>` (the production head). Confirm with
   Manno which one actually ships before deleting either — removing the wrong one breaks the
