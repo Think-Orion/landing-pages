@@ -7,11 +7,44 @@ Landing pages for this program. Assets in `assets/` are shared across all three.
 | Page | File | Status | Indexing |
 |---|---|---|---|
 | Cold audience | `Cold_Audience_dc.html` | ✅ built | `index, follow` |
-| In-market hero form | `In-Market_Hero_Form_dc.html` | not yet added | `index, follow` |
+| In-market hero form | `In-Market_Hero_Form_dc.html` | ✅ built | `index, follow` |
 | Thank you | `Thank_You_dc.html` | not yet added | **`noindex, follow`** |
 
 Cold and in-market pages must not share an FAQ set — duplicate `FAQPage` JSON-LD on
-one domain splits search signals.
+one domain splits search signals. Both carry 7 questions with no overlapping question
+strings and no identical answers; highest answer similarity between the two pages is
+0.67 (the recognition answers, which differ in framing).
+
+---
+
+## In-market hero form page
+
+Higher-intent variant: hero-embedded form, no advisor or journey section, static 2-column
+testimonial grid, burgundy 4-item trust bar, "Apply Now" in nav and sticky bar.
+
+Same technical pass as the cold page — robots, favicon links, Open Graph and Twitter card,
+commented-out canonical/`og:url`/`og:image`, the Stape GTM install, and footer legal links.
+Differences worth knowing:
+
+- **No `loading="lazy"`** — the page has no real `<img>` tags at all. The hero background
+  and all four faculty portraits are `image-slot` placeholders, so there is nothing to lazy
+  load. 56KB before the pass, 63KB after, with no embedded images.
+- **One Vala mount** (`#vala-funnel`) rather than the cold page's two.
+- **Five `image-slot` placeholders**, not four — the hero background is one of them, so in
+  a raw browser the hero shows only its dark gradient with no photo behind it.
+- **No footer padding needed.** This page's sticky-CTA logic already hides the bar when the
+  footer is in view (`atFooter`), so the legal links are clickable without the clearance the
+  cold page required. Verified by hit test at both widths.
+
+Two defects found and fixed during the pass:
+
+1. **The `<title>` contained `(Hero Form)`** — an internal template label that would have
+   appeared in search results and browser tabs. Removed.
+2. **The cost FAQ answer was 93% identical to the cold page's**, differing only by three
+   synonym swaps. That is duplicate FAQ content on one domain competing with itself.
+   Rewritten with every approved figure intact ($450/credit, $5,400 total, 20% Dean's
+   Scholarship, 15% alumni and staff, payment plans, employer documentation) but genuinely
+   distinct wording. Visible copy and JSON-LD updated together so they stay verbatim.
 
 ---
 

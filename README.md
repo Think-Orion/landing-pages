@@ -30,7 +30,7 @@ favicon, and `og:image` — exist once per program instead of being duplicated p
 
 | Client | Faculty | Program | Cold | In-Market | Thank You |
 |---|---|---|:--:|:--:|:--:|
-| AUB | FAS | Online Graduate Diploma in Online Education | ✅ | — | — |
+| AUB | FAS | Online Graduate Diploma in Online Education | ✅ | ✅ | — |
 
 ## Conventions
 

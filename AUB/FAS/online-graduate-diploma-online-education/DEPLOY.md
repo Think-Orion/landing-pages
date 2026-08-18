@@ -7,9 +7,13 @@ something if skipped.
 
 ## 1. Files in this package
 
+Applies to **both pages** unless noted: `Cold_Audience_dc.html` (cold audience) and
+`In-Market_Hero_Form_dc.html` (in-market, higher intent).
+
 | File | Where it goes |
 |---|---|
-| `Cold_Audience_dc.html` | The page itself |
+| `Cold_Audience_dc.html` | Cold-audience page |
+| `In-Market_Hero_Form_dc.html` | In-market page |
 | `assets/favicon/*` | **Web root** of the serving domain — not next to the page |
 | `assets/premise-educator-mce-badge-800x800.jpg` | Optional: host it and swap the data URI (see §5) |
 | `assets/advisor-mike-220x211.jpg` | Optional: same |
@@ -88,13 +92,12 @@ The page currently shows a **static mockup** of the lead form. It does not submi
 anything: there is no `<form>` tag, the buttons are `type="button"`, and there is no
 submit handler.
 
-Two mount points are ready for the live Vala embed:
+Mount points ready for the live Vala embed:
 
-- `#vala-funnel` — hero form card
-- `#vala-funnel-2` — advisor section form card
-
-Confirm the embed supports **two mounts on one page**. The DC runtime mounts only
-`#vala-funnel` by default.
+- **Cold page:** `#vala-funnel` (hero) and `#vala-funnel-2` (advisor section). Confirm the
+  embed supports **two mounts on one page** — the DC runtime mounts only `#vala-funnel` by
+  default.
+- **In-market page:** `#vala-funnel` only.
 
 When the form is wired, add the `dataLayer.push` for the conversion event — ask ops for
 the expected event name and parameters. Nothing is tracked on submit today.
@@ -121,9 +124,13 @@ Two open questions for ops:
 
 - The `<script>` immediately before `</body>` replicates sticky-CTA, FAQ, CTA-scroll and
   slider behaviour for review outside the DC runtime. Remove it once DC wiring is live.
-- Four `<image-slot>` elements are faculty portrait placeholders. They render only in the
-  DC preview and are **invisible in a normal browser**. Replace each with a plain `<img>`
-  once real photos exist: Dr. Hoda Baytiyeh, Dr. Mahmud Shihab, Rayan Fayed, Rana Ghazzi.
+- `<image-slot>` elements are placeholders. They render only in the DC preview and are
+  **invisible in a normal browser**. Replace each with a plain `<img>` once real photos
+  exist.
+  - **Cold page:** 4 faculty portraits — Dr. Hoda Baytiyeh, Dr. Mahmud Shihab, Rayan Fayed,
+    Rana Ghazzi.
+  - **In-market page:** the same 4 portraits **plus the hero background photo**. Until it is
+    supplied the hero shows only its dark gradient.
 - All testimonial quotes are `[TESTIMONIAL / NAME / ROLE]` placeholders.
 - Faculty `[Short bio]` lines are placeholders.
 
@@ -149,5 +156,6 @@ Two open questions for ops:
   preview harness), one in `<helmet>` (the production head), so only one ships. Confirm
   with Manno which before deleting either — removing the wrong one breaks the DC preview.
 - The sticky CTA bar is hidden over the hero and over the form section, and shown in
-  between. The footer carries `padding-bottom:104px` so the bar cannot cover the legal
-  links at page bottom.
+  between. On the **cold page** the footer carries `padding-bottom:104px` so the bar cannot
+  cover the legal links at page bottom; the **in-market page** hides the bar at the footer
+  instead and needs no padding. Both verified by hit test at 1440px and 390px.
