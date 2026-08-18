@@ -8,6 +8,15 @@
 <body>
 <x-dc>
 <helmet>
+  <!-- Google Tag Manager — Stape server-side container GTM-KZDZDJJ, loaded first-party
+       from trk.aub.edu.lb via Stape's custom loader. Supplied by AUB ops with
+       "do not modify this code", so it is pasted verbatim: the obfuscated query
+       parameter IS the container reference and must not be reformatted or re-encoded.
+       Placed first in <helmet> because <helmet> is what DC injects into the production
+       <head>, and the install instruction is "as close as possible to the top of <head>". -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src="https://trk.aub.edu.lb/del06kgsdkznp.js?"+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','5xknvli=GQpHLDA%2BSiAqKiAvLjlBHU1cVFpCFwlWERsYRQEXEkUcDA%3D%3D');</script>
+  <!-- End Google Tag Manager -->
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AUB Graduate Diploma in Online Education — 100% Online</title>
   <meta name="description" content="Earn our Graduate Diploma in Online Education: 12 credits, 4 courses, 100% online. Includes the Microsoft Certified Educator certification at no extra cost." />
@@ -44,19 +53,6 @@
   <meta name="twitter:description" content="Our Graduate Diploma in Online Education: 12 credits, 4 courses, 100% online. Includes the Microsoft Certified Educator certification at no extra cost." />
   <meta name="twitter:image" content="[OG IMAGE URL — same value as og:image above]" />
 
-  <!-- Analytics: dataLayer is initialised so page/form events can be pushed before
-       the container loads. The GTM loader stays commented out until the real
-       container ID is supplied — a placeholder ID would fire a 404 on every view.
-       Uncomment, replace GTM-XXXXXXX, and add the matching <noscript> iframe as the
-       first element in <body>. -->
-  <script>window.dataLayer = window.dataLayer || [];</script>
-  <!--
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
-  var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-  j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
-  -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -85,6 +81,13 @@
   </style>
 </helmet>
 
+<!-- Google Tag Manager (noscript) — must sit immediately after the opening <body> tag.
+     In this DC file the production body content starts here, right after </helmet>, so
+     this is the equivalent position. CONFIRM WITH MANNO that DC emits it inside <body>
+     and does not hoist it into the head. -->
+<noscript><iframe src="https://trk.aub.edu.lb/ns.html?id=GTM-KZDZDJJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <!-- CLIENT-FILL ITEMS — Graduate Diploma in Online Education:
      Intake shown as Fall 2026. Semester start of August 31, 2026 comes from the AUB MA page (the diploma page still shows 2025) — confirm the diploma start date before launch
      Faculty names and courses are from client materials; [Short bio] lines and portraits to be supplied by AUB
@@ -100,7 +103,10 @@
      Favicon links are wired to root-relative paths. Deploy favicon.ico, favicon-32x32.png, favicon-16x16.png, apple-touch-icon.png, android-chrome-192x192.png, android-chrome-512x512.png and site.webmanifest to the WEB ROOT of the serving domain
      site.webmanifest is in assets/favicon/. Its name/short_name arrived empty from the generator and are now filled. Its theme_color is still the generator default #ffffff — consider AUB burgundy #8B1333 to match the meta theme-color
      Footer legal links added as placeholders: privacy policy, terms of use, non-discrimination. Link AUB's own existing policies — required at the point of data collection and for Google Ads lead-gen approval
-     GTM loader is present but commented out — supply the container ID, uncomment it, and add the matching <noscript> iframe as the first element in <body>
+     GTM is live: Stape server-side container GTM-KZDZDJJ, loaded first-party from trk.aub.edu.lb. Pasted verbatim per AUB ops ("do not modify this code") — do not reformat the obfuscated query parameter
+     Confirm with Manno that DC emits the GTM <noscript> iframe inside <body> and does not hoist it into the head
+     Consent Mode v2 is still unconfirmed. It is handled in the server-side container, not on the page — confirm with AUB ops before running EEA traffic
+     No dataLayer event fires on form submit yet, because the lead form is still a static mockup with no <form> tag. Wire the conversion event when the live Vala embed goes in — ask ops for the expected event name and parameters
      robots is set to index,follow on this page. The Thank You page must be noindex,follow instead
      Duplicate viewport meta: one sits in the outer <head> next to support.js (DC preview harness), one in <helmet> (the production head). Confirm with Manno which one ships before deleting either — removing the wrong one breaks the DC preview
      Both photos are still data URIs. Decoded files are extracted to assets/ ready to upload; swap the two src values to hosted URLs to drop ~81KB (52%) from this file

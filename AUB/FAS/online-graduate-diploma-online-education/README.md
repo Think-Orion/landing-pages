@@ -39,7 +39,7 @@ Added to the `<helmet>` block (which is what DC injects into the production `<he
 | Favicon | Wired to **root-relative** paths (`/favicon.ico`, `/favicon-32x32.png`, `/favicon-16x16.png`, `/apple-touch-icon.png`, `/site.webmanifest`) plus `<meta name="theme-color" content="#8B1333">`. See "Favicon deployment" below. |
 | Open Graph | Complete (`og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description`, `og:url`, `og:image` + width/height/alt). `og:url` and `og:image` are placeholders. |
 | Twitter card | `summary_large_image`, sharing the OG title/description/image |
-| GTM | `window.dataLayer` initialised live. The loader snippet is **present but commented out** — a placeholder container ID would fire a 404 on every page view. Supply the real ID, uncomment, and add the matching `<noscript>` iframe as the first element in `<body>`. |
+| GTM | **Live.** Stape server-side container `GTM-KZDZDJJ`, loaded first-party from `trk.aub.edu.lb`. See "Tag Manager" below. |
 
 #### Favicon deployment
 
@@ -83,6 +83,34 @@ changing it to AUB burgundy `#8B1333` to match the `theme-color` meta tag.
 **Favicons will never appear in a raw/githack preview** served from a repo subfolder,
 because `/favicon.ico` resolves to the preview host's root. That is expected, not a bug —
 verify on a real deployment.
+
+### Tag Manager
+
+Supplied by AUB ops as a **Stape server-side GTM custom loader**, not a standard
+`googletagmanager.com` install:
+
+- **Container:** `GTM-KZDZDJJ`
+- **Loader:** `https://trk.aub.edu.lb/del06kgsdkznp.js?<obfuscated-param>` — first-party
+  subdomain with a randomised filename, which is how Stape's custom loader avoids
+  ad-blocker and ITP interference.
+- **Placement:** loader is the **first element in `<helmet>`** (the block DC injects into
+  the production `<head>`), matching the "as close as possible to the top of `<head>`"
+  instruction. The `<noscript>` iframe sits immediately after `</helmet>`, which is where
+  the production body content begins.
+
+Ops said **"do not modify this code"**, so both snippets are pasted verbatim. The
+obfuscated query parameter *is* the container reference — do not reformat, re-encode, or
+pretty-print it. It is verified byte-identical against what ops supplied.
+
+**Open questions for ops:**
+
+- **Consent Mode v2** is unconfirmed. With a server-side container it is handled in the
+  container, not on the page — confirm before running EEA traffic.
+- **No conversion event fires on form submit yet.** The lead form is still a static mockup
+  with no `<form>` tag, no submit handler and no `dataLayer.push`. Ask ops for the expected
+  event name and parameters, then wire it when the live Vala embed goes in.
+- If Enhanced Conversions for leads is in use, hashed email/phone go to Google — AUB's
+  privacy policy needs to cover that, which ties into the footer links below.
 
 ### Footer
 
@@ -141,8 +169,10 @@ The full list lives in the comment block at the top of `Cold_Audience_dc.html`. 
 - Confirm Microsoft brand-usage approval for the MCE badge.
 - Confirm the Lebanese MoE recognition wording (mirrors the client-reviewed email sequence)
   belongs on a paid landing page.
-- Fill the `[CANONICAL URL]` and `[OG IMAGE URL]` placeholders; supply the GTM container ID
-  and uncomment the loader.
+- Fill the `[CANONICAL URL]` and `[OG IMAGE URL]` placeholders.
+- Confirm with Manno that DC emits the GTM `<noscript>` iframe inside `<body>` rather than
+  hoisting it into the head.
+- Confirm Consent Mode v2 and the form-submit conversion event with ops (see "Tag Manager").
 - Deploy the `assets/favicon/` files to the web root of the serving domain (they are in the
   repo, but the repo does not serve them). Use the flattened `apple-touch-icon.png`.
 - Supply AUB's privacy policy, terms of use and non-discrimination URLs for the footer links.
