@@ -111,6 +111,49 @@ preview and are invisible in a raw browser. That is expected, not a bug.
 | `cold-fac-3` / `hf-fac-3` | Both | Rayan Fayed portrait |
 | `cold-fac-4` / `hf-fac-4` | Both | Rana Ghazzi portrait |
 
+## Preview URLs
+
+The repo is public, so `githack` serves these files as real HTML with no token.
+
+**Live on the branch** — re-serves after every push, short cache. Use while reviewing.
+
+| Page | URL |
+|---|---|
+| Cold audience | `https://raw.githack.com/Think-Orion/landing-pages/claude/aub-fas-ma-computing-education-6bcyjd/AUB/FAS/online-ma-computing-in-education/Cold_Audience_dc.html` |
+| In-market | `https://raw.githack.com/Think-Orion/landing-pages/claude/aub-fas-ma-computing-education-6bcyjd/AUB/FAS/online-ma-computing-in-education/In-Market_Hero_Form_dc.html` |
+| Thank you | `https://raw.githack.com/Think-Orion/landing-pages/claude/aub-fas-ma-computing-education-6bcyjd/AUB/FAS/online-ma-computing-in-education/Thank_You_dc.html` |
+
+**Pinned to commit `797755e`** — immutable and permanently cached, so it cannot
+shift under a reviewer mid-comment. Use when sending to the client.
+
+| Page | URL |
+|---|---|
+| Cold audience | `https://rawcdn.githack.com/Think-Orion/landing-pages/797755e846367264b2160a5e156847057f58cb4c/AUB/FAS/online-ma-computing-in-education/Cold_Audience_dc.html` |
+| In-market | `https://rawcdn.githack.com/Think-Orion/landing-pages/797755e846367264b2160a5e156847057f58cb4c/AUB/FAS/online-ma-computing-in-education/In-Market_Hero_Form_dc.html` |
+| Thank you | `https://rawcdn.githack.com/Think-Orion/landing-pages/797755e846367264b2160a5e156847057f58cb4c/AUB/FAS/online-ma-computing-in-education/Thank_You_dc.html` |
+
+### What a githack preview will not show
+
+None of these are bugs — they are all artefacts of serving a DC template file
+straight from a repo subfolder rather than from a real deployment.
+
+- **`GTM FIRES ON PREVIEW.`** Verified: all three pages request `trk.aub.edu.lb`
+  and push to `dataLayer` on a raw load, because the container `<script>` sits
+  inside `<helmet>` and scripts execute wherever they appear in the DOM. Every
+  preview view lands in AUB's live Stape container, and thank-you page views may
+  register as conversions. Filter internal traffic or review in a context you are
+  happy to see in the data.
+- **Faculty portraits and the in-market hero background are blank.** They are
+  `image-slot` placeholders and `image-slot.js` is not in the repo, so they render
+  only inside the DC preview.
+- **Favicons are absent.** The paths are root-relative by design, so `/favicon.ico`
+  resolves to githack's root, not the repo subfolder. Verify on a real deployment.
+- **`support.js` 404s.** That is the DC preview harness. The standalone script at
+  the bottom of each file drives the sticky CTA, both accordion sets, CTA scroll
+  and the testimonial slider, so every behaviour is still testable.
+- **Social share cards will not render** from a githack URL — `og:image` and
+  `og:url` are deliberately commented out pending the live domain.
+
 ## Open client-fill items
 
 Each page carries its own `CLIENT-FILL` comment block at the top. Consolidated:
