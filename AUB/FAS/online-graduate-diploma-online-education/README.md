@@ -228,7 +228,12 @@ elements are invisible in a raw browser.
 
 ### Handoff
 
-`DEPLOY.md` is the client-facing deployment checklist — favicon placement, the four
+Two documents, two audiences:
+
+- **`CLIENT-HANDOFF.md`** — for AUB marketing and admissions. Non-technical, plain language,
+  organised as: content we need, decisions we need, connecting the leads to the CRM, checks
+  that can only be done on a live URL, and what not to change. This is the one to send.
+- **`DEPLOY.md`** — for whoever deploys the pages — favicon placement, the four
 commented-out URL tags, footer policy links, the Vala form wiring, and what to strip
 before launch. Hand it over with the page.
 
