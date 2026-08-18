@@ -11,14 +11,35 @@ DC template. Single self-contained file: `Cold_Audience_dc.html`.
 - A standalone `<script>` before `</body>` replicates sticky-CTA / FAQ / CTA-scroll /
   slider behaviour for review outside the DC runtime. Remove once DC wiring is live.
 
+## Head, indexing and tracking
+
+Added to the `<helmet>` block (which is what DC injects into the production `<head>`):
+
+| Tag | State |
+|---|---|
+| `robots` | `index, follow, max-image-preview:large` — this page carries its own FAQPage schema targeting cold-stage long-tail queries, so it is meant to be indexed. **The Thank You page must be `noindex, follow` instead.** |
+| `canonical` | `[CANONICAL URL]` placeholder — needs the live URL |
+| Favicon | Three `[FAVICON URL]` placeholders (ico, svg, apple-touch-icon) |
+| Open Graph | Complete (`og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description`, `og:url`, `og:image` + width/height/alt). `og:url` and `og:image` are placeholders. |
+| Twitter card | `summary_large_image`, sharing the OG title/description/image |
+| GTM | `window.dataLayer` initialised live. The loader snippet is **present but commented out** — a placeholder container ID would fire a 404 on every page view. Supply the real ID, uncomment, and add the matching `<noscript>` iframe as the first element in `<body>`. |
+
 ## Assets
 
-Embedded as base64 data URIs (no external files needed to review this page):
+Both photos are still embedded as base64 data URIs, so the file reviews standalone
+with no external requests. They account for **~81KB — 52% of the file**; swapping
+both `src` values to hosted URLs drops it from ~156KB to ~73KB.
 
-- Premise image (the "You don't need a tech background" section composite, includes the MCE badge)
-- Advisor portrait (Mike)
+The decoded originals are extracted and ready to upload to a CDN:
 
-Swap both to hosted files at launch.
+| File | Size | Used for |
+|---|---|---|
+| `assets/premise-educator-mce-badge-800x800.jpg` | 54KB | Premise section composite (includes the MCE badge) |
+| `assets/advisor-mike-220x211.jpg` | 6KB | Advisor portrait |
+
+Both `<img>` tags now carry `loading="lazy"`, `decoding="async"` and intrinsic
+`width`/`height`. Neither is the LCP element — the hero is type and a form, no image —
+so lazy-loading both is safe.
 
 **Still needed from AUB** — four faculty portraits, currently `image-slot` placeholders that
 render only inside the DC preview:
@@ -46,11 +67,18 @@ The full list lives in the comment block at the top of `Cold_Audience_dc.html`. 
 - Confirm Microsoft brand-usage approval for the MCE badge.
 - Confirm the Lebanese MoE recognition wording (mirrors the client-reviewed email sequence)
   belongs on a paid landing page.
+- Fill the `[CANONICAL URL]`, `[FAVICON URL]` and `[OG IMAGE URL]` placeholders; supply the
+  GTM container ID and uncomment the loader.
+- **Duplicate `viewport` meta is intentional for now.** One sits in the outer `<head>` beside
+  `support.js` (the DC preview harness), one in `<helmet>` (the production head). Confirm with
+  Manno which one actually ships before deleting either — removing the wrong one breaks the
+  DC preview.
 
 ## QA status
 
 Rendered in Chromium at 1440×900 and 390×844: no horizontal overflow at either width
-(`scrollWidth == clientWidth`), both embedded images load, tag balance clean, JSON-LD parses
-and all 7 Q&A pairs match the visible copy verbatim. Standalone behaviour verified — sticky CTA
+(`scrollWidth == clientWidth`), tag balance clean, JSON-LD parses and all 7 Q&A pairs match
+the visible copy verbatim. Both lazy images confirmed to decode at their full intrinsic size
+(800×800 and 220×211) once scrolled into view, with no layout shift. Standalone behaviour verified — sticky CTA
 hides over the hero and over `#form` and shows in between, FAQ accordions open/close with icon
 rotation, CTAs scroll to `#form`, slider arrows show on mobile and hide on desktop.
