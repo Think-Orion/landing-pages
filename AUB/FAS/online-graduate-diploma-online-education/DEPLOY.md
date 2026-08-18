@@ -7,13 +7,14 @@ something if skipped.
 
 ## 1. Files in this package
 
-Applies to **both pages** unless noted: `Cold_Audience_dc.html` (cold audience) and
-`In-Market_Hero_Form_dc.html` (in-market, higher intent).
+Applies to **all three pages** unless noted.
 
 | File | Where it goes |
 |---|---|
 | `Cold_Audience_dc.html` | Cold-audience page |
 | `In-Market_Hero_Form_dc.html` | In-market page |
+| `Thank_You_dc.html` | Post-submission page |
+| `assets/Graduate_diploma_in_online_education_factsheet_2025.pdf` | Keep it reachable from the thank-you page — see §10 |
 | `assets/favicon/*` | **Web root** of the serving domain — not next to the page |
 | `assets/premise-educator-mce-badge-800x800.jpg` | Optional: host it and swap the data URI (see §5) |
 | `assets/advisor-mike-220x211.jpg` | Optional: same |
@@ -45,6 +46,9 @@ need changing.
 ---
 
 ## 3. Canonical, og:url, og:image — BLOCKING before launch
+
+**Landing pages only.** The thank-you page deliberately has no canonical and no Open Graph
+tags — see §10.
 
 Four tags are **commented out** in the `<head>` because the live URL was unknown at
 handoff. Search for `REPLACE-WITH-LIVE-URL` in the HTML. Uncomment each and fill in:
@@ -118,6 +122,10 @@ Two open questions for ops:
   the GTM loader, or by a CMP. Not present yet. Confirm before running EEA traffic.
 - **Conversion event** on form submit (see §5).
 
+**Verify the thank-you page tag first.** A thank-you pageview is the usual conversion
+signal, so if that one tag is wrong, conversions go uncounted while spend continues. Check
+it in GTM preview mode before the campaigns go live.
+
 ---
 
 ## 7. Remove before launch
@@ -156,6 +164,31 @@ Two open questions for ops:
   preview harness), one in `<helmet>` (the production head), so only one ships. Confirm
   with Manno which before deleting either — removing the wrong one breaks the DC preview.
 - The sticky CTA bar is hidden over the hero and over the form section, and shown in
-  between. On the **cold page** the footer carries `padding-bottom:104px` so the bar cannot
-  cover the legal links at page bottom; the **in-market page** hides the bar at the footer
-  instead and needs no padding. Both verified by hit test at 1440px and 390px.
+  between. The **cold** and **thank-you** pages carry `padding-bottom:104px` on the footer so
+  the bar cannot cover the legal links at page bottom; the **in-market page** hides the bar at
+  the footer instead and needs no padding. All three verified by hit test at 1440px and 390px.
+
+---
+
+## 10. Thank-you page specifics
+
+- **`robots: noindex, follow`** — must never be indexed. It would rank for brand queries,
+  expose the post-conversion state in search results, and inflate conversion counts with
+  organic arrivals that never submitted the form.
+- **No canonical, no Open Graph, by design.** Canonical is meaningless alongside `noindex`;
+  Open Graph would invite social sharing of a page that should not be shared. Do not "fix"
+  these by adding them.
+- **Factsheet.** `assets/Graduate_diploma_in_online_education_factsheet_2025.pdf` is a
+  compressed copy: **1.8MB, down from the 22.2MB original.** 77% of the original was one
+  2551×14099px PNG reused as the background of all four pages, resampled to 150dpi. All four
+  pages and all selectable text are intact and renders are visually indistinguishable. The
+  22.2MB original is not in the repo — keep the client's copy as the source of truth. The
+  download button uses a relative path and opens in a new tab; adjust the href if the PDF is
+  hosted elsewhere.
+- **Booking link** goes to Mike's Microsoft Bookings calendar in two places (Step 1 card and
+  sticky bar). Confirm it is the right service for this program and that the meeting length
+  there matches the "20 minutes" wording — Bookings pages are JS apps and cannot be read
+  automatically.
+- **Confirm the next-step promise.** The hero says a call within 48 hours. Verify with
+  admissions that the first touch is a call, not an email, and that 48 hours is accurate.
+- **Testimonials** are bracketed placeholders. Never publish them.

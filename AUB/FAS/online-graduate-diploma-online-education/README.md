@@ -8,12 +8,49 @@ Landing pages for this program. Assets in `assets/` are shared across all three.
 |---|---|---|---|
 | Cold audience | `Cold_Audience_dc.html` | ✅ built | `index, follow` |
 | In-market hero form | `In-Market_Hero_Form_dc.html` | ✅ built | `index, follow` |
-| Thank you | `Thank_You_dc.html` | not yet added | **`noindex, follow`** |
+| Thank you | `Thank_You_dc.html` | ✅ built | **`noindex, follow`** |
 
 Cold and in-market pages must not share an FAQ set — duplicate `FAQPage` JSON-LD on
 one domain splits search signals. Both carry 7 questions with no overlapping question
 strings and no identical answers; highest answer similarity between the two pages is
 0.67 (the recognition answers, which differ in framing).
+
+---
+
+## Thank-you page
+
+Two steps (book the call, grab the factsheet) plus graduate testimonials and a sticky
+booking bar. The template's Step 3 survey was removed at client request, so survey handlers
+are stripped from the DC script. Booking goes to Mike's Microsoft Bookings calendar.
+
+Head handling differs from the two landing pages, deliberately:
+
+- **`robots: noindex, follow`.** A thank-you page must never be indexed — it would rank for
+  brand queries, expose the post-conversion state in search results, and inflate conversion
+  counts with organic arrivals that never submitted the form. `follow` keeps link equity
+  flowing to aub.edu.lb.
+- **No canonical.** Meaningless alongside `noindex`, and a canonical pointing elsewhere
+  would contradict the directive.
+- **No Open Graph.** The page is post-conversion and unindexed, so it should never be shared
+  or previewed socially; adding `og:*` would invite exactly that.
+- **GTM matters most here.** A thank-you pageview is the usual conversion signal, so this is
+  the install worth verifying in GTM preview mode before spend starts.
+
+### The factsheet
+
+`assets/Graduate_diploma_in_online_education_factsheet_2025.pdf` — **1.8MB, down from
+22.2MB.** 77% of the original file was a single 2551×14099px PNG reused as the background on
+all four pages; it was resampled to 150dpi at JPEG q82 using PyMuPDF's `rewrite_images`. All
+four pages and all 4,153 characters of selectable text survive, and page renders are visually
+indistinguishable from the original.
+
+The 22.2MB original is **not** in the repo — a binary that size bloats git history
+permanently, and the client holds the source of truth. The download button links to the
+compressed copy at a relative path and opens in a new tab, as approved.
+
+Same sticky-bar defect as the cold page: this page has no at-footer check, so the booking bar
+covered the footer legal links. Footer carries `padding-bottom:104px`; verified by hit test at
+both widths.
 
 ---
 
