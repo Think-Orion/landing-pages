@@ -17,7 +17,7 @@ Applies to **all three pages** unless noted.
 | `assets/Graduate_diploma_in_online_education_factsheet_2025.pdf` | Keep it reachable from the thank-you page — see §10 |
 | `assets/favicon/*` | **Web root** of the serving domain — not next to the page |
 | `assets/og-image-1200x630.jpg` | Host it — the social sharing image for both landing pages |
-| `assets/hero-online-educator.jpg` | **Not yet supplied.** The cold page's image-led hero expects it here |
+| `assets/hero-online-educator-{960,1920}.{webp,jpg}` | Host all four — the cold page's hero, served responsively |
 | `assets/premise-educator-mce-badge-800x800.jpg` | Optional: host it and swap the data URI (see §5) |
 | `assets/advisor-mike-220x211.jpg` | Optional: same |
 
@@ -149,11 +149,12 @@ it in GTM preview mode before the campaigns go live.
     Rana Ghazzi.
   - **In-market page:** the same 4 portraits **plus the hero background photo**. Until it is
     supplied the hero shows only its dark gradient.
-  - **Cold page hero photo:** the hero now expects `assets/hero-online-educator.jpg`. It is a
-    plain `<img>`, not an image-slot, and a failed load is hidden, so until the file exists the
-    hero renders as a deliberate burgundy panel rather than anything broken. Loaded eager with
-    `fetchpriority="high"` because it is the likely LCP element — **do not add
-    `loading="lazy"` to it.**
+  - **Cold page hero photo: supplied and optimised.** Served through `<picture>` with
+    `srcset` — four files, two widths × WebP/JPEG. A desktop downloads **58KB** (1920 WebP), a
+    phone **25KB** (960 WebP), with JPEG fallbacks at 125KB / 46KB. Source was a 2.17MB PNG,
+    cropped to 16:9 before export. All four must be hosted together or the fallbacks break.
+    Loaded eager with `fetchpriority="high"` because it is the likely LCP element — **do not add
+    `loading="lazy"` to it,** and do not "simplify" the `<picture>` down to a single `<img>`.
 - All testimonial quotes are `[TESTIMONIAL / NAME / ROLE]` placeholders.
 - Faculty `[Short bio]` lines are placeholders.
 

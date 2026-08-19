@@ -126,7 +126,8 @@
      Comparison-table figures for non-AUB categories are indicative ranges; validate before publishing
      Vala form embed (continuous-learning-survey.js) — confirm the correct funnel script for this program
      ONE form host on this page now: #vala-funnel in the advisor section. The hero form was removed at client request, so the two-mount question is moot — the DC runtime mounts #vala-funnel and that is the only one
-     Hero is image-led: it expects assets/hero-online-educator.jpg. The photo is NOT yet supplied. Until it is, the burgundy base plus gradient overlays render as a deliberate burgundy hero, and a failed image load is hidden — nothing looks broken. Drop the file in and adjust object-position if the crop needs it
+     Hero photo supplied and optimised: assets/hero-online-educator-{960,1920}.{webp,jpg}. From a 2.17MB source PNG down to 58KB (1920 WebP) / 125KB (1920 JPEG), 25KB / 46KB at 960. Cropped to 16:9 before export. Served via <picture> with srcset so phones fetch the 960 file
+     Hero overlay is a flat black scrim at 58% plus a gentle top/bottom gradient, per the client reference screenshot
      Hero photo is loaded eager with fetchpriority=high because it is the likely LCP element — do not add loading=lazy to it
      Hero animations are CSS only (zoom, word stagger, rule wipe, scroll nudge) and are fully disabled under prefers-reduced-motion
      Hero CTA reads "Speak to an Advisor" per client instruction. Nav and sticky bar still say "Chat to an Advisor" — align them if one phrase is wanted throughout
@@ -186,17 +187,29 @@
   <section id="hero" style="position:relative;background:#5E0C22;color:#fff;overflow:hidden;min-height:min(82vh,740px);display:flex;flex-direction:column">
 
     <!-- Photo layer. NOT lazy-loaded: this is the hero and the likely LCP element, so it is
-         eager with high fetch priority — the opposite of the below-fold images. -->
+         eager with high fetch priority — the opposite of the below-fold images.
+         Two widths and two formats: the browser takes the 960 file on a phone and the 1920 on
+         a desktop, and WebP where supported (58KB) falling back to JPEG (125KB). Source was a
+         2.17MB PNG. Cropped to 16:9 before export so desktop wastes few pixels while a phone
+         still has vertical room to crop into. -->
     <div aria-hidden="true" style="position:absolute;inset:0;overflow:hidden">
-      <img class="hz" src="assets/hero-online-educator.jpg" alt="" loading="eager" fetchpriority="high" decoding="async"
-           onerror="this.style.display='none'"
-           style="width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block" />
+      <picture>
+        <source type="image/webp" sizes="100vw"
+                srcset="assets/hero-online-educator-960.webp 960w, assets/hero-online-educator-1920.webp 1920w" />
+        <img class="hz" src="assets/hero-online-educator-1920.jpg" sizes="100vw"
+             srcset="assets/hero-online-educator-960.jpg 960w, assets/hero-online-educator-1920.jpg 1920w"
+             alt="" loading="eager" fetchpriority="high" decoding="async"
+             onerror="this.style.display='none'"
+             style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block" />
+      </picture>
     </div>
 
-    <!-- Depth overlays: vertical for legibility top and bottom, diagonal to keep the left
-         side dark enough for white type whatever the photo does. -->
-    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(23,21,20,.55) 0%,rgba(94,12,34,.22) 42%,rgba(23,21,20,.68) 100%)"></div>
-    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,rgba(23,21,20,.86) 0%,rgba(94,12,34,.58) 46%,rgba(94,12,34,.12) 100%)"></div>
+    <!-- Flat black scrim, per the reference screenshot. One even layer rather than a tint, so
+         the photograph reads through uniformly. A second, gentler vertical gradient darkens the
+         very top and bottom only, which keeps the nav edge and the stats row legible without
+         making the middle muddy. -->
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:rgba(0,0,0,.58)"></div>
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 68%,rgba(0,0,0,.42) 100%)"></div>
     <!-- Fine grain, stops the gradients banding on large screens -->
     <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;background-image:url(&quot;data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);background-repeat:repeat;background-size:128px 128px"></div>
 
@@ -220,10 +233,13 @@
 
         <div class="hu" style="animation-delay:1.1s;display:flex;flex-wrap:wrap;align-items:center;gap:16px clamp(20px,3vw,30px)">
           <button onClick="{{ scrollToForm }}" style="background:#8B1333;color:#fff;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.2px;padding:15px 30px;border:none;border-radius:999px;box-shadow:0 14px 34px rgba(0,0,0,.34);transition:background .2s,transform .2s" style-hover="background:#A81A42">Speak to an Advisor</button>
-          <button onClick="{{ scrollToForm }}" style="display:inline-flex;align-items:center;gap:8px;background:none;border:none;color:rgba(255,255,255,.9);font-family:inherit;font-size:14.5px;font-weight:600;padding:6px 2px;transition:color .2s" style-hover="color:#fff">
+          <!-- Jumps to the "You don't need a tech background." section (#program), not to the
+               form — this is the reassurance path for someone not ready to enquire yet. Plain
+               anchor: the helmet sets scroll-behavior:smooth, so no JS is involved. -->
+          <a href="#program" style="display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.9);font-family:inherit;font-size:14.5px;font-weight:600;padding:6px 2px;text-decoration:none;transition:color .2s" style-hover="color:#fff">
             See how it works
             <svg viewBox="0 0 24 24" aria-hidden="true" style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14M13 5l7 7-7 7"></path></svg>
-          </button>
+          </a>
         </div>
       </div>
     </div>
@@ -268,7 +284,7 @@
     </div>
   </section>
 
-  <section id="program" style="padding:clamp(56px,8vw,110px) clamp(18px,4vw,48px);background:#fff">
+  <section id="program" style="scroll-margin-top:80px;padding:clamp(56px,8vw,110px) clamp(18px,4vw,48px);background:#fff">
     <div style="max-width:1140px;margin-inline:auto">
       <div data-reveal style="max-width:62ch">
         <p style="font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#8B1333;margin-bottom:16px">Built For Educators</p>

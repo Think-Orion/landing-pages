@@ -99,8 +99,11 @@ template. Single self-contained file.
 - **Image-led hero.** No eyebrow text, word-by-word heading reveal, gradient and grain
   overlays, `Speak to an Advisor` scrolling to `#form`, and a `Scroll to explore` cue anchored
   to `#program`. All motion is CSS only and fully disabled under `prefers-reduced-motion`.
-  The hero expects `assets/hero-online-educator.jpg`; until it is supplied a failed load is
-  hidden and the burgundy base plus overlays read as a deliberate hero.
+  The hero photo is client-supplied image 3 from their set, cropped to 16:9 and exported at two
+  widths in WebP and JPEG: a desktop pulls 58KB, a phone 25KB, down from a 2.17MB source PNG.
+  Overlaid with a flat black scrim at 58% plus a soft top/bottom gradient, per the client's
+  reference screenshot. `See how it works` anchors to `#program` — the "You don't need a tech
+  background." section — rather than to the form, since it is the reassurance path.
 - A standalone `<script>` before `</body>` replicates sticky-CTA / FAQ / CTA-scroll /
   slider behaviour for review outside the DC runtime. Remove once DC wiring is live.
 
