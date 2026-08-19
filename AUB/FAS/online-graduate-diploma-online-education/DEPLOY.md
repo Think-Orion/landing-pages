@@ -17,6 +17,7 @@ Applies to **all three pages** unless noted.
 | `assets/Graduate_diploma_in_online_education_factsheet_2025.pdf` | Keep it reachable from the thank-you page — see §10 |
 | `assets/favicon/*` | **Web root** of the serving domain — not next to the page |
 | `assets/og-image-1200x630.jpg` | Host it — the social sharing image for both landing pages |
+| `assets/hero-online-educator.jpg` | **Not yet supplied.** The cold page's image-led hero expects it here |
 | `assets/premise-educator-mce-badge-800x800.jpg` | Optional: host it and swap the data URI (see §5) |
 | `assets/advisor-mike-220x211.jpg` | Optional: same |
 
@@ -106,9 +107,10 @@ submit handler.
 
 Mount points ready for the live Vala embed:
 
-- **Cold page:** `#vala-funnel` (hero) and `#vala-funnel-2` (advisor section). Confirm the
-  embed supports **two mounts on one page** — the DC runtime mounts only `#vala-funnel` by
-  default.
+- **Cold page:** `#vala-funnel` in the advisor section — **one mount only.** The hero form
+  was removed at client request and the hero is now image-led, so the previous
+  two-mounts-on-one-page question no longer applies. The remaining mount was renamed from
+  `vala-funnel-2` so the DC runtime picks it up.
 - **In-market page:** `#vala-funnel` only.
 
 When the form is wired, add the `dataLayer.push` for the conversion event — ask ops for
@@ -147,6 +149,11 @@ it in GTM preview mode before the campaigns go live.
     Rana Ghazzi.
   - **In-market page:** the same 4 portraits **plus the hero background photo**. Until it is
     supplied the hero shows only its dark gradient.
+  - **Cold page hero photo:** the hero now expects `assets/hero-online-educator.jpg`. It is a
+    plain `<img>`, not an image-slot, and a failed load is hidden, so until the file exists the
+    hero renders as a deliberate burgundy panel rather than anything broken. Loaded eager with
+    `fetchpriority="high"` because it is the likely LCP element — **do not add
+    `loading="lazy"` to it.**
 - All testimonial quotes are `[TESTIMONIAL / NAME / ROLE]` placeholders.
 - Faculty `[Short bio]` lines are placeholders.
 

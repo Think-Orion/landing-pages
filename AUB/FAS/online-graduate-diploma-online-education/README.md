@@ -93,8 +93,14 @@ template. Single self-contained file.
 ### What's in the file
 
 - 7-question FAQ with matching `FAQPage` JSON-LD (visible text and schema are verbatim-identical).
-- Two Vala form hosts: `#vala-funnel` (hero) and `#vala-funnel-2` (advisor section).
-  Each sits below a static field mockup that must be replaced by the live embed.
+- **One** Vala form host: `#vala-funnel` in the advisor section, below a static field mockup
+  that must be replaced by the live embed. The hero form was removed at client request, which
+  also retires the open question of whether the embed supports two mounts on one page.
+- **Image-led hero.** No eyebrow text, word-by-word heading reveal, gradient and grain
+  overlays, `Speak to an Advisor` scrolling to `#form`, and a `Scroll to explore` cue anchored
+  to `#program`. All motion is CSS only and fully disabled under `prefers-reduced-motion`.
+  The hero expects `assets/hero-online-educator.jpg`; until it is supplied a failed load is
+  hidden and the burgundy base plus overlays read as a deliberate hero.
 - A standalone `<script>` before `</body>` replicates sticky-CTA / FAQ / CTA-scroll /
   slider behaviour for review outside the DC runtime. Remove once DC wiring is live.
 
