@@ -107,6 +107,15 @@
        at 820px and 5.3:1 at 1440px, all clear of the 4.5:1 AA floor with margin to spare if
        the photo is ever swapped. A heavier wash passed too but buried the image. */
     .hero-scrim { background: linear-gradient(100deg,rgba(58,10,22,.84) 0,rgba(58,10,22,.78) 620px,rgba(58,10,22,.54) 900px,rgba(58,10,22,.24) 100%); }
+    /* Hero secondary CTA. Overrides the sheet's default link colour and hover underline,
+       which are tuned for burgundy-on-white and would be unreadable over the hero photo.
+       The hover affordance is the arrow nudge instead. */
+    .hero-link { display: inline-flex; align-items: center; gap: 9px; color: #fff; font-size: 15px; font-weight: 600; letter-spacing: .2px; text-decoration: none; }
+    .hero-link:hover, .hero-link:focus-visible { color: #fff; text-decoration: none; }
+    .hero-link:focus-visible { outline: 2px solid #F0BECC; outline-offset: 4px; border-radius: 2px; }
+    .hero-link-arrow { transition: transform .25s ease; }
+    .hero-link:hover .hero-link-arrow { transform: translateX(4px); }
+    @media (prefers-reduced-motion: reduce) { .hero-link-arrow { transition: none; } }
   </style>
 </helmet>
 
@@ -196,8 +205,15 @@
         <h1 style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(34px,5.2vw,60px);font-weight:700;line-height:1.05;letter-spacing:-1.2px;color:#fff;margin-bottom:clamp(20px,2.6vw,28px);text-wrap:pretty;text-shadow:0 2px 24px rgba(0,0,0,.28)">Teach technology. <em style="font-style:italic;color:#F0BECC">Design learning.</em></h1>
         <div style="height:1px;max-width:400px;background:linear-gradient(to right,rgba(255,255,255,.52),rgba(255,255,255,.16),rgba(255,255,255,0));margin-bottom:clamp(20px,2.6vw,28px)"></div>
         <p style="font-size:clamp(15px,1.6vw,18px);line-height:1.68;color:rgba(255,255,255,.88);max-width:56ch;margin-bottom:clamp(28px,4vw,40px);font-weight:300">Our MA in Computing in Education is the only online master’s in the region that combines Education and Computer Science in one curriculum. You graduate ready to teach programming in schools, design online learning, and lead educational technology.</p>
-        <div style="margin-bottom:clamp(30px,4vw,44px)">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:clamp(16px,2.6vw,30px);margin-bottom:clamp(30px,4vw,44px)">
           <button onClick="{{ scrollToForm }}" style="background:#8B1333;color:#fff;border:none;border-radius:4px;padding:16px 32px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.2px;box-shadow:0 14px 34px rgba(0,0,0,.34)" style-hover="background:#6B0F27">Speak to an Advisor</button>
+          <!-- Secondary CTA. A plain in-page anchor, not a DC handler: #how-it-works is the
+               premise section directly below the hero, and html{scroll-behavior:smooth} already
+               animates the jump, so this needs no JS and works even if the DC runtime never
+               processes the page. -->
+          <a class="hero-link" href="#how-it-works">See how it works
+            <svg class="hero-link-arrow" viewBox="0 0 24 24" aria-hidden="true" style="width:17px;height:17px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg>
+          </a>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,.24);border-bottom:1px solid rgba(255,255,255,.24)">
           <div style="flex:1 1 100px;padding:18px 20px 18px 0;border-right:1px solid rgba(255,255,255,.24)">
@@ -226,7 +242,7 @@
     </div>
   </section>
 
-  <section style="padding:clamp(56px,8vw,110px) clamp(18px,4vw,48px);background:#fff">
+  <section id="how-it-works" style="padding:clamp(56px,8vw,110px) clamp(18px,4vw,48px);background:#fff;scroll-margin-top:80px">
     <div style="max-width:1140px;margin-inline:auto">
       <div data-reveal style="max-width:62ch">
         <p style="font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#8B1333;margin-bottom:16px">Open To All Backgrounds</p>

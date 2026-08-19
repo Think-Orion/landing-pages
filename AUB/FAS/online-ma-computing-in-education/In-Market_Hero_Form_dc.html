@@ -98,6 +98,19 @@
     .jm .jm-title, .jm .jm-dot { transition: color .2s ease, background-color .2s ease; }
     .jm:hover .jm-title { color: #8B1333 !important; }
     .jm:hover .jm-dot { background: #8B1333 !important; }
+    /* Opportunity section. The copy column is placed in the SAME GRID ROW as the photo,
+       rather than nudged down by a fixed margin, so the two tops stay aligned however the
+       heading wraps — it runs to two lines at 1440px and three in a narrower column, and a
+       hard-coded offset would drift with it. Below 900px the grid collapses to one column
+       and the placement rules drop out, giving heading, photo, copy, facts in DOM order
+       with no leftover offset. */
+    .opp-grid { display: grid; grid-template-columns: 1fr; gap: clamp(24px,3.2vw,32px); max-width: 1180px; margin-inline: auto; }
+    @media (min-width: 900px) {
+      .opp-grid { grid-template-columns: 1fr 1fr; column-gap: clamp(28px,4vw,60px); row-gap: clamp(24px,3.2vw,32px); align-items: start; }
+      .opp-grid > .opp-head { grid-column: 1; grid-row: 1; }
+      .opp-grid > .opp-img  { grid-column: 1; grid-row: 2; }
+      .opp-grid > .opp-body { grid-column: 2; grid-row: 2; }
+    }
   </style>
 <!-- FAQPage structured data for search and answer engines; keep in sync with the visible FAQ text -->
 <script type="application/ld+json">
@@ -321,20 +334,22 @@
   </section>
 
   <section style="padding:clamp(52px,7vw,96px) clamp(18px,4vw,44px);background:#fff">
-    <div style="max-width:1180px;margin-inline:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(28px,4vw,60px)">
-      <div data-reveal>
+    <div class="opp-grid">
+      <div class="opp-head" data-reveal>
         <p style="font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#8B1333;margin-bottom:16px">The Opportunity</p>
         <h2 style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(24px,3.1vw,37px);font-weight:700;line-height:1.16;letter-spacing:-.7px;color:#171514;text-wrap:pretty">Education and Computer Science belong in one degree.</h2>
+      </div>
+      <div class="opp-img" data-reveal>
         <!-- Opportunity photo. Real files with a responsive srcset rather than a data URI:
              the 2000x1500 source is 3.4MB, and the AVIF/WebP variants land at 20-56KB.
              Sized for a single grid column, so sizes caps at 560px on desktop. -->
         <picture>
           <source type="image/avif" sizes="(max-width:900px) 92vw, 560px" srcset="assets/opportunity-coding-600.avif 600w, assets/opportunity-coding-1200.avif 1200w">
           <source type="image/webp" sizes="(max-width:900px) 92vw, 560px" srcset="assets/opportunity-coding-600.webp 600w, assets/opportunity-coding-1200.webp 1200w">
-          <img src="assets/opportunity-coding-1200.jpg" sizes="(max-width:900px) 92vw, 560px" srcset="assets/opportunity-coding-600.jpg 600w, assets/opportunity-coding-1200.jpg 1200w" alt="Students writing code on desktop computers and a laptop in a bright classroom" width="1200" height="900" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:6px;margin-top:clamp(24px,3.2vw,32px);box-shadow:0 18px 44px rgba(23,21,20,.14)">
+          <img src="assets/opportunity-coding-1200.jpg" sizes="(max-width:900px) 92vw, 560px" srcset="assets/opportunity-coding-600.jpg 600w, assets/opportunity-coding-1200.jpg 1200w" alt="Students writing code on desktop computers and a laptop in a bright classroom" width="1200" height="900" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:6px;box-shadow:0 18px 44px rgba(23,21,20,.14)">
         </picture>
       </div>
-      <div data-reveal>
+      <div class="opp-body" data-reveal>
         <div style="font-size:clamp(15px,1.5vw,16.5px);line-height:1.76;color:#45403D;max-width:60ch">
           <p>Schools need educators who can teach programming and design technology-rich learning. Employers want instructional designers with formal, recognized credentials. The AUB MA in Computing in Education covers both fields in a single interdisciplinary program.</p>
           <p style="margin-top:16px">You graduate ready to teach CS in K-12 classrooms, design online learning, and lead educational technology. You finish with an AUB master’s recognized by NYSED and the MCE certificate from Microsoft, two credentials that work on your CV the day you graduate.</p>

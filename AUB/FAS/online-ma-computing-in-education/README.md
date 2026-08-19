@@ -19,10 +19,11 @@ diploma builds and arrived complete. What this folder adds on top is the repo's
 standing head/indexing/tracking block, the decoded image assets, the social share
 image, and the QA pass recorded at the bottom of this file.
 
-Since the initial setup the client has asked for three changes, all applied: the cold
-hero dropped its form in favour of a full-bleed photo, the in-market Opportunity
-section gained a photo, and the two landing pages now share one FAQ set with indexing
-turned off. See "Cold hero", "FAQs" and "Assets".
+Since the initial setup the client has asked for several changes, all applied: the cold
+hero dropped its form in favour of a full-bleed photo and gained a "See how it works"
+secondary CTA, the in-market Opportunity section gained a photo with its copy column
+re-aligned to it, and the two landing pages now share one FAQ set with indexing turned
+off. See "Cold hero", "In-market Opportunity section", "FAQs" and "Assets".
 
 ## Program facts used across the pages
 
@@ -105,8 +106,18 @@ Consequences worth knowing:
 - **The page now has one form, not two.** The advisor section's form is the only one, and
   `#vala-funnel` was moved onto it — the hero form held the page's only DC mount. The
   earlier open question about whether the embed supports two instances is moot.
-- **Every CTA on the page scrolls to that one form.** `Speak to an Advisor` in the hero,
-  the nav button and the sticky bar all resolve to `#form`.
+- **The hero carries two CTAs.** `Speak to an Advisor` (primary, burgundy) scrolls to
+  `#form`. **`See how it works`** (secondary, white text with an arrow) is a plain
+  in-page anchor to `#how-it-works`, the premise section directly below the hero
+  ("You don't need a computer science background."). It is deliberately not a DC
+  handler: `html{scroll-behavior:smooth}` already animates an anchor jump, so the link
+  needs no JS and still works if the DC runtime never processes the page.
+- **Why that anchor.** The client named "The Opportunity — Education and Computer Science
+  belong in one degree." as the target, but that section only exists on the **in-market**
+  page. They confirmed the cold page's positional equivalent instead: the premise section
+  is the first explanatory block below the hero, carries the classroom/MCE photo, and
+  makes the same education-plus-computer-science argument.
+- **The nav button and sticky bar still resolve to `#form`.**
 - **The nav and sticky CTAs still read "Chat to an Advisor".** Left as-is: the skill's
   house style for the cold page is "Chat to an Advisor" throughout, and the variation
   avoids showing one phrase three times in a viewport. Say the word if you want all
@@ -118,6 +129,17 @@ Consequences worth knowing:
   lands at 9.3:1 (390px), 7.1:1 (820px) and 5.3:1 (1440px), all clear of the 4.5:1 AA
   floor. It is the lightest wash that holds that margin; anything lighter dipped under
   4.5:1 at desktop, anything heavier buried the photo.
+
+## In-market Opportunity section
+
+The copy column is placed in the **same grid row** as the photo, so their tops align. It
+is not nudged down with a margin: the heading runs to two lines at some widths and three
+at others, and any fixed offset would drift as it re-wraps. Placement rules apply only
+from 900px; below that the grid collapses to a single column and the rules drop out,
+giving heading → photo → copy → facts in DOM order with no leftover offset.
+
+Verified: photo top and copy top differ by **0px** at 900, 1024, 1280 and 1440, and the
+section stacks cleanly at 390 and 768.
 
 ## Assets
 
@@ -254,6 +276,8 @@ the hero, Opportunity-image and FAQ changes.
 | Responsive image negotiation | Pass — Chromium picks `hero-cold-elearning-800.avif` at 390px and `-1600.avif` at 1440px; `opportunity-coding-600.avif` at a 560px column |
 | No missing assets | Pass — no failed requests apart from the expected `support.js` / `image-slot.js` |
 | Hero copy contrast | Pass — body text ≥ 5.3:1 against the lightest pixel beneath it at 390, 820, 1024 and 1440 (AA floor is 4.5:1) |
+| Hero secondary CTA | Pass — renders white, label correct, click lands on `#how-it-works` with the heading clear of the top, arrow nudges on hover, and the primary CTA still reaches `#form`. Checked at 1440 and 390 |
+| Opportunity alignment | Pass — photo top and copy top differ by 0px at 900, 1024, 1280 and 1440; stacks in DOM order at 390 and 768 |
 | Console / page errors | None |
 | HTML tag balance | Balanced on all three pages |
 | FAQ JSON-LD ↔ visible copy | 7/7 questions and 7/7 answers match byte-for-byte on both landing pages |
@@ -268,5 +292,12 @@ the hero, Opportunity-image and FAQ changes.
 The comparison table is wider than a 390px viewport and scrolls inside its own
 `overflow-x` container. That is intended — the page itself does not scroll sideways.
 
-Page heights: cold 8290px desktop / 12585px mobile; in-market 5190 / 7938;
+Page heights: cold 8290px desktop / 12585px mobile; in-market 5253 / 7934;
 thank you 2085 / 2388.
+
+Known and pre-existing, not introduced here: the top nav is `position:sticky;top:0` but
+never pins, because a template wrapper (`<div style="width:100%;background:#fff;
+overflow-x:hidden">`) makes itself a scroll container and silently disables sticky on its
+descendants. The client-approved diploma build behaves identically. Left alone — the
+overflow guard is presumably there to prevent sideways scroll, and the `scroll-margin-top:
+80px` on anchor targets gives clean clearance either way.
