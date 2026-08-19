@@ -20,9 +20,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AUB MA in Computing in Education — 100% Online</title>
   <meta name="description" content="Our MA in Computing in Education combines Education and Computer Science in one 30-credit online degree. NYSED-recognized, with the MCE certification included." />
-  <!-- Indexing: this page carries its own FAQPage schema targeting long-tail
-       queries, so it is meant to be indexed. The Thank You page is noindex instead. -->
-  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <!-- Indexing: NOINDEX BY CLIENT DECISION. Both landing pages are paid-traffic only
+       and are deliberately kept out of the index, which is what makes it safe for the
+       cold and in-market pages to carry an identical FAQ set — duplicate FAQPage schema
+       only splits search signals when both pages are crawlable. follow is kept so link
+       equity still flows to aub.edu.lb.
+       IF THIS IS EVER FLIPPED BACK TO index: the two pages must stop sharing an FAQ set
+       first, or re-angle one of them. See the FAQ note in README.md. -->
+  <meta name="robots" content="noindex, follow" />
   <!-- ============================================================================
        CANONICAL — COMMENTED OUT ON PURPOSE. UNCOMMENT AND FILL BEFORE GOING LIVE.
        The live URL is not known at handoff. A canonical tag pointing at a literal
@@ -93,6 +98,15 @@
     .jm .jm-title, .jm .jm-dot { transition: color .2s ease, background-color .2s ease; }
     .jm:hover .jm-title { color: #8B1333 !important; }
     .jm:hover .jm-dot { background: #8B1333 !important; }
+    /* Hero scrim. Stops are anchored in PIXELS, not percentages, because the copy column
+       is a fixed 680px max-width while a percentage gradient moves with the viewport —
+       that mismatch left the copy sitting over the light end of the wash at tablet widths.
+       Anchored this way the wash stays dark across the copy column at every width and only
+       thins out to the right of it, where the photo has no text over it. Tuned against the
+       worst-case (lightest) pixel under the copy: body text lands at 9.3:1 at 390px, 7.1:1
+       at 820px and 5.3:1 at 1440px, all clear of the 4.5:1 AA floor with margin to spare if
+       the photo is ever swapped. A heavier wash passed too but buried the image. */
+    .hero-scrim { background: linear-gradient(100deg,rgba(58,10,22,.84) 0,rgba(58,10,22,.78) 620px,rgba(58,10,22,.54) 900px,rgba(58,10,22,.24) 100%); }
   </style>
 </helmet>
 
@@ -109,7 +123,7 @@
      Advisor photo is embedded as a data URI (client-supplied, carried over from the diploma build) — same hosting note. Remaining image-slot elements (faculty portraits) only render inside the DC preview
      A standalone script before </body> replicates sticky/FAQ/CTA behavior for review outside the DC runtime — remove it once DC wiring is live
      Lebanese MoE FAQ wording mirrors the client-reviewed email sequence — confirm it should appear on paid landing pages
-     Both form cards contain a static lead-form mockup (first/last name, email, phone with dial code, contact preference, bachelor's yes/no) — replace with the live Vala embed or wire via DC
+     The advisor form card contains a static lead-form mockup (first/last name, email, phone with dial code, contact preference, bachelor's yes/no) — replace with the live Vala embed or wire via DC. It is the only form on the page since the hero form was removed
 
      ---- ADDED AT REPO SETUP (unsourced claims found while checking copy against the 2025 factsheet) ----
      PRICE/CREDITS — HIGHEST IMPACT: the 30-credit / $13,500 headline assumes BOTH prerequisites are
@@ -162,64 +176,44 @@
     </div>
   </nav>
 
-  <section id="hero" style="background:#5E0C22;color:#fff;position:relative;overflow:hidden">
-    <div style="max-width:1140px;margin-inline:auto;padding:clamp(48px,7vw,96px) clamp(18px,4vw,48px) clamp(40px,6vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:clamp(32px,5vw,64px);align-items:center">
-      <div>
-        <div style="display:inline-flex;align-items:center;gap:9px;font-size:10.5px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.26);padding:7px 14px;border-radius:3px;margin-bottom:clamp(24px,3vw,34px)">
-          <span style="width:5px;height:5px;border-radius:50%;background:#E8A0B4;display:block"></span>
-          Now Enrolling · Fall 2026
+  <section id="hero" style="position:relative;overflow:hidden;background:#3A0A16;color:#fff;min-height:clamp(540px,80vh,740px);display:flex;flex-direction:column;justify-content:center">
+    <!-- Full-bleed hero photo. Ships as real files with a responsive srcset rather than a
+         data URI: at 2000x1500 the source is 2.8MB, and AVIF/WebP variants at two widths
+         cut the mobile payload to ~15KB. Paths are relative to this file, so they resolve
+         both in a githack preview and in a deployment that carries assets/ alongside. -->
+    <picture>
+      <source type="image/avif" sizes="100vw" srcset="assets/hero-cold-elearning-800.avif 800w, assets/hero-cold-elearning-1600.avif 1600w">
+      <source type="image/webp" sizes="100vw" srcset="assets/hero-cold-elearning-800.webp 800w, assets/hero-cold-elearning-1600.webp 1600w">
+      <img src="assets/hero-cold-elearning-1600.jpg" sizes="100vw" srcset="assets/hero-cold-elearning-800.jpg 800w, assets/hero-cold-elearning-1600.jpg 1600w" alt="Laptop on a desk with online learning icons projected above the keyboard" fetchpriority="high" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center">
+    </picture>
+    <!-- Brand scrim. Burgundy wash weighted to the left so white type keeps contrast over
+         the photo's bright top-left corner; the second layer adds top and bottom depth. -->
+    <div class="hero-scrim" style="position:absolute;inset:0"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.30) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 66%,rgba(0,0,0,.38) 100%)"></div>
+
+    <div style="position:relative;z-index:2;width:100%;max-width:1140px;margin-inline:auto;padding:clamp(56px,8vw,104px) clamp(18px,4vw,48px)">
+      <div style="max-width:680px">
+        <h1 style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(34px,5.2vw,60px);font-weight:700;line-height:1.05;letter-spacing:-1.2px;color:#fff;margin-bottom:clamp(20px,2.6vw,28px);text-wrap:pretty;text-shadow:0 2px 24px rgba(0,0,0,.28)">Teach technology. <em style="font-style:italic;color:#F0BECC">Design learning.</em></h1>
+        <div style="height:1px;max-width:400px;background:linear-gradient(to right,rgba(255,255,255,.52),rgba(255,255,255,.16),rgba(255,255,255,0));margin-bottom:clamp(20px,2.6vw,28px)"></div>
+        <p style="font-size:clamp(15px,1.6vw,18px);line-height:1.68;color:rgba(255,255,255,.88);max-width:56ch;margin-bottom:clamp(28px,4vw,40px);font-weight:300">Our MA in Computing in Education is the only online master’s in the region that combines Education and Computer Science in one curriculum. You graduate ready to teach programming in schools, design online learning, and lead educational technology.</p>
+        <div style="margin-bottom:clamp(30px,4vw,44px)">
+          <button onClick="{{ scrollToForm }}" style="background:#8B1333;color:#fff;border:none;border-radius:4px;padding:16px 32px;font-family:inherit;font-size:15px;font-weight:700;letter-spacing:.2px;box-shadow:0 14px 34px rgba(0,0,0,.34)" style-hover="background:#6B0F27">Speak to an Advisor</button>
         </div>
-        <h1 style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(32px,5vw,58px);font-weight:700;line-height:1.06;letter-spacing:-1.2px;color:#fff;margin-bottom:clamp(18px,2.4vw,26px);text-wrap:pretty">Teach technology. <em style="font-style:italic;color:#F0BECC">Design learning.</em></h1>
-        <p style="font-size:clamp(15px,1.6vw,18px);line-height:1.68;color:rgba(255,255,255,.76);max-width:56ch;margin-bottom:clamp(28px,4vw,40px);font-weight:300">Our MA in Computing in Education is the only online master’s in the region that combines Education and Computer Science in one curriculum. You graduate ready to teach programming in schools, design online learning, and lead educational technology.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)">
-          <div style="flex:1 1 100px;padding:18px 20px 18px 0;border-right:1px solid rgba(255,255,255,.18)">
+        <div style="display:flex;flex-wrap:wrap;gap:0;border-top:1px solid rgba(255,255,255,.24);border-bottom:1px solid rgba(255,255,255,.24)">
+          <div style="flex:1 1 100px;padding:18px 20px 18px 0;border-right:1px solid rgba(255,255,255,.24)">
             <div style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(23px,2.9vw,31px);font-weight:800;color:#fff;line-height:1;margin-bottom:6px">$450</div>
-            <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:500">Per credit hour</div>
+            <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.66);font-weight:500">Per credit hour</div>
           </div>
-          <div style="flex:1 1 100px;padding:18px 20px;border-right:1px solid rgba(255,255,255,.18)">
+          <div style="flex:1 1 100px;padding:18px 20px;border-right:1px solid rgba(255,255,255,.24)">
             <div style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(23px,2.9vw,31px);font-weight:800;color:#fff;line-height:1;margin-bottom:6px">30</div>
-            <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:500">Credits, 9 courses + project</div>
+            <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.66);font-weight:500">Credits, 9 courses + project</div>
           </div>
           <div style="flex:1 1 100px;padding:18px 0 18px 20px">
             <div style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(23px,2.9vw,31px);font-weight:800;color:#fff;line-height:1;margin-bottom:6px">MCE</div>
-            <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.55);font-weight:500">Microsoft certification, free</div>
+            <div style="font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:rgba(255,255,255,.66);font-weight:500">Microsoft certification, free</div>
           </div>
         </div>
       </div>
-      <div>
-        <div style="background:#fff;border-top:3px solid #8B1333;border-radius:4px;box-shadow:0 30px 70px rgba(0,0,0,.32);padding:clamp(20px,2.6vw,28px);min-height:300px">
-          <div style="padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid #E6E1DB">
-            <p style="font-size:17px;font-weight:700;color:#171514;letter-spacing:-.2px">Start your journey</p>
-            <p style="font-size:12.5px;color:#7A736F;margin-top:4px">Your AUB master’s and the MCE certificate, for $13,500 in total.</p>
-          </div>
-          <!-- Static lead-form mockup for client review. Replace with the live Vala embed, or wire these fields via DC. -->
-          <div class="lf">
-            <div class="row field">
-              <div><label for="lf-first-hero">First Name <span style="color:#8B1333">*</span></label><input required type="text" id="lf-first-hero" placeholder="First name"></div>
-              <div><label for="lf-last-hero">Last Name <span style="color:#8B1333">*</span></label><input required type="text" id="lf-last-hero" placeholder="Last name"></div>
-            </div>
-            <div class="field"><label for="lf-email-hero">Email <span style="color:#8B1333">*</span></label><input required type="email" id="lf-email-hero" placeholder="you@example.com"></div>
-            <div class="field"><label for="lf-phone-hero">Phone <span style="color:#8B1333">*</span></label>
-              <div style="display:grid;grid-template-columns:118px 1fr;gap:10px">
-                <select aria-label="Country code"><option>🇱🇧 +961</option><option>🇦🇪 +971</option><option>🇸🇦 +966</option><option>🇶🇦 +974</option><option>🇰🇼 +965</option><option>🇧🇭 +973</option><option>🇴🇲 +968</option><option>🇯🇴 +962</option><option>🇪🇬 +20</option><option>🇮🇶 +964</option><option>🇹🇷 +90</option><option>🇬🇧 +44</option><option>🇫🇷 +33</option><option>🇩🇪 +49</option><option>🇺🇸 +1</option></select>
-                <input required type="tel" id="lf-phone-hero" placeholder="Phone number">
-              </div>
-            </div>
-            <div class="field"><label for="lf-contact-hero">Preferred Contact Method <span style="color:#8B1333">*</span></label>
-              <select required id="lf-contact-hero"><option>Email</option><option>Phone</option></select>
-            </div>
-            <div class="field"><label>Do you hold a bachelor’s degree? <span style="color:#8B1333">*</span></label>
-              <div class="radio-row">
-                <label><input required type="radio" name="lf-degree-hero"> Yes</label>
-                <label><input required type="radio" name="lf-degree-hero"> No</label>
-              </div>
-            </div>
-            <div style="display:flex;align-items:center;gap:7px;margin:2px 0 10px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;flex-shrink:0;stroke:#7A736F;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11 V8 a4 4 0 0 1 8 0 v3"></path></svg><span style="font-size:12px;color:#7A736F;line-height:1.5">No obligation. An AUB advisor replies within 48 hours.</span></div><button type="button" style="width:100%;background:#8B1333;color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px;padding:13px 20px;border-radius:6px;border:none">Start My Journey</button>
-            <p style="font-size:11px;color:#7A736F;line-height:1.5;margin-top:10px;text-align:center">By submitting this form, you consent to AUB contacting you about this program.</p>
-          </div>
-          <div id="vala-funnel"></div>
-        </div>
-        </div>
     </div>
   </section>
 
@@ -669,7 +663,7 @@
         </div>
       </div>
       <div style="background:#fff;border-radius:4px;padding:clamp(20px,2.6vw,28px);box-shadow:0 24px 60px rgba(0,0,0,.35);min-height:280px">
-        <!-- Second Vala mount: the DC runtime currently mounts #vala-funnel (now in the hero). Confirm whether the embed supports a second instance here, or point this section at the hero form. -->
+        <!-- Sole Vala mount. The hero form was removed in favour of the image-led hero, so this is now the only form on the page and #vala-funnel lives here. The earlier two-mount question is moot. -->
         <!-- Static lead-form mockup for client review. Replace with the live Vala embed, or wire these fields via DC. -->
           <div class="lf">
             <div class="row field">
@@ -695,6 +689,7 @@
             <div style="display:flex;align-items:center;gap:7px;margin:2px 0 10px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;flex-shrink:0;stroke:#7A736F;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11 V8 a4 4 0 0 1 8 0 v3"></path></svg><span style="font-size:12px;color:#7A736F;line-height:1.5">Your details go only to AUB’s admissions team.</span></div><button type="button" style="width:100%;background:#8B1333;color:#fff;font-size:14px;font-weight:700;letter-spacing:.2px;padding:13px 20px;border-radius:6px;border:none">Start the Conversation</button>
             <p style="font-size:11px;color:#7A736F;line-height:1.5;margin-top:10px;text-align:center">By submitting this form, you consent to AUB contacting you about this program.</p>
           </div>
+          <div id="vala-funnel"></div>
           <div id="vala-funnel-2"></div>
       </div>
     </div>

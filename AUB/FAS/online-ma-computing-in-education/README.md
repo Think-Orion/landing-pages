@@ -7,15 +7,22 @@ Three pages make up the funnel for this program. All three are self-contained
 
 | Page | File | Status | Indexing |
 |---|---|---|---|
-| Cold audience | `Cold_Audience_dc.html` | ✅ built | `index, follow` |
-| In-market hero form | `In-Market_Hero_Form_dc.html` | ✅ built | `index, follow` |
+| Cold audience | `Cold_Audience_dc.html` | ✅ built | **`noindex, follow`** |
+| In-market hero form | `In-Market_Hero_Form_dc.html` | ✅ built | **`noindex, follow`** |
 | Thank you | `Thank_You_dc.html` | ✅ built | **`noindex, follow`** |
+
+All three pages are noindex by client decision — they are paid-traffic only. That is
+what makes it safe for the two landing pages to share one FAQ set; see "FAQs".
 
 The three page bodies were drafted against the client-approved Online Education
 diploma builds and arrived complete. What this folder adds on top is the repo's
 standing head/indexing/tracking block, the decoded image assets, the social share
-image, and the QA pass recorded at the bottom of this file. One FAQ defect was
-fixed during setup — see "FAQ de-duplication".
+image, and the QA pass recorded at the bottom of this file.
+
+Since the initial setup the client has asked for three changes, all applied: the cold
+hero dropped its form in favour of a full-bleed photo, the in-market Opportunity
+section gained a photo, and the two landing pages now share one FAQ set with indexing
+turned off. See "Cold hero", "FAQs" and "Assets".
 
 ## Program facts used across the pages
 
@@ -54,7 +61,7 @@ Applied to all three pages, matching the Online Education builds.
 
 | Tag | State |
 |---|---|
-| `robots` | Cold and in-market: `index, follow, max-image-preview:large`. Thank you: **`noindex, follow`** — a post-submission page must never be indexed, and `follow` keeps link equity flowing to aub.edu.lb. |
+| `robots` | **All three pages: `noindex, follow`.** Client decision — these are paid-traffic landing pages and are deliberately kept out of the index. `follow` keeps link equity flowing to aub.edu.lb. This is load-bearing: it is the reason the two landing pages may share an FAQ set. If indexing is ever switched back on, the FAQ sets must be split again first. |
 | `canonical` | **Commented out.** The live URL is unknown at handoff, and a canonical pointing at a placeholder can misdirect indexing, whereas an absent one is safe — engines self-canonicalise. Uncomment and fill before launch. |
 | Favicon | Root-relative paths (`/favicon.ico`, `/favicon-32x32.png`, `/favicon-16x16.png`, `/apple-touch-icon.png`, `/site.webmanifest`) plus `<meta name="theme-color" content="#8B1333">`. Files ship in `assets/favicon/` and must be deployed to the **domain root** — they will not appear in a raw-repo preview from a subfolder, which is expected. |
 | Open Graph | `og:type`, `og:site_name`, `og:locale`, `og:title`, `og:description` live on both landing pages. `og:url`, `og:image` and its width/height/alt are **commented out** pending the live URL — a broken `og:image` renders a share as a blank card. The image file itself is supplied. The thank-you page carries no OG tags, matching the diploma build. |
@@ -64,33 +71,70 @@ Applied to all three pages, matching the Online Education builds.
 `og:title` differs between the two landing pages on purpose ("Teach technology.
 Design learning." vs "…Apply now.") so the two share cards are distinguishable.
 
-## FAQ de-duplication
+## FAQs
 
-Both landing pages carry seven FAQs mirrored in `FAQPage` JSON-LD. As drafted,
-**three questions were byte-identical across the two pages**, which splits search
-signals when two pages on one domain answer the same query with the same schema.
-The approved diploma build has zero overlap by design. The three in-market
-questions were re-angled to the in-market frame:
+Both landing pages carry the **same seven FAQs**, mirrored in `FAQPage` JSON-LD that
+matches the visible copy byte-for-byte.
 
-| Was (collided with cold page) | Now |
-|---|---|
-| Is the AUB MA in Computing in Education recognized internationally? | How is the AUB MA recognized outside Lebanon? |
-| Can I start with the Graduate Diploma before committing to the full MA? | Do I need the Graduate Diploma before applying to the MA? |
-| Is the Microsoft Certified Educator (MCE) certification included in the AUB MA? | How do I earn the MCE certification during the MA? |
+This is deliberate and it depends on the indexing decision. Duplicate `FAQPage` schema
+across two pages splits search signals only when both pages are crawlable — with both
+set to `noindex`, there is no signal to split. The client confirmed these pages are
+paid-traffic only and are not to be crawled, so the in-market page was aligned to the
+cold set rather than kept distinct.
 
-Two answer openings moved with their questions: the diploma answer now opens "No.
-You can apply directly to the MA" (the question inverted, so a leading "Yes" would
-have asserted the opposite), and the MCE answer drops its leading "Yes." because
-"How do I earn…" is not a yes/no question. Visible copy and JSON-LD were changed
-together and verified byte-identical. Overlap is now zero.
+**The two settings are coupled. If `robots` is ever flipped back to `index`, split the
+FAQ sets in the same change.** An earlier revision of this build carried seven distinct
+in-market questions and can be recovered from git history if that day comes:
+
+```
+git log --oneline -- AUB/FAS/online-ma-computing-in-education/In-Market_Hero_Form_dc.html
+```
+
+The section headings still differ by page type — "Everything you need to know before you
+decide." on cold, "Your questions, answered." on in-market — because those are section
+labels, not FAQ content.
+
+## Cold hero
+
+The hero no longer carries a lead form. It is a full-bleed photo with the headline,
+description, a single **Speak to an Advisor** CTA and the three-stat strip, and the
+eyebrow pill ("Now Enrolling · Fall 2026") is gone.
+
+Consequences worth knowing:
+
+- **The page now has one form, not two.** The advisor section's form is the only one, and
+  `#vala-funnel` was moved onto it — the hero form held the page's only DC mount. The
+  earlier open question about whether the embed supports two instances is moot.
+- **Every CTA on the page scrolls to that one form.** `Speak to an Advisor` in the hero,
+  the nav button and the sticky bar all resolve to `#form`.
+- **The nav and sticky CTAs still read "Chat to an Advisor".** Left as-is: the skill's
+  house style for the cold page is "Chat to an Advisor" throughout, and the variation
+  avoids showing one phrase three times in a viewport. Say the word if you want all
+  three aligned to "Speak to an Advisor".
+- **The scrim is tuned, not eyeballed.** Its gradient stops are anchored in pixels
+  rather than percentages, because the copy column is a fixed 680px while a percentage
+  gradient tracks the viewport — that mismatch put the copy over the light end of the
+  wash at tablet widths. Measured against the lightest pixel under the copy, body text
+  lands at 9.3:1 (390px), 7.1:1 (820px) and 5.3:1 (1440px), all clear of the 4.5:1 AA
+  floor. It is the lightest wash that holds that margin; anything lighter dipped under
+  4.5:1 at desktop, anything heavier buried the photo.
 
 ## Assets
 
 Photos are embedded as data URIs for review builds; the decoded originals live in
 `assets/` and the `src` values swap to hosted URLs at launch.
 
+Two photos ship as **real files with a responsive `srcset`** rather than data URIs. Their
+sources were 2.8MB and 3.4MB PNGs; inlining those would have been the opposite of the
+mobile-speed brief, since base64 inflates by a third, cannot be cached separately and
+offers no per-width variants. Paths are relative to the HTML file, so they resolve both
+in a githack preview and in any deployment that carries `assets/` alongside the page.
+Browsers negotiate AVIF first, then WebP, then JPEG.
+
 | File | Size | Used for |
 |---|---|---|
+| `assets/hero-cold-elearning-{800,1600}.{avif,webp,jpg}` | 15–121KB each | Cold page full-bleed hero. Mobile AVIF is **15KB**, down from a 2.8MB source |
+| `assets/opportunity-coding-{600,1200}.{avif,webp,jpg}` | 20–148KB each | In-market Opportunity section. Mobile AVIF is **20KB**, down from a 3.4MB source |
 | `assets/mce-classroom-robotics-1100x1100.jpg` | 155KB | Cold page premise section — educator and students with robotics kits, MCE badge composited top-right |
 | `assets/advisor-mike-220x211.jpg` | 6KB | Cold page advisor portrait |
 | `assets/factsheet-cover-300x400.jpg` | 33KB | Thank-you page factsheet thumbnail |
@@ -105,7 +149,7 @@ preview and are invisible in a raw browser. That is expected, not a bug.
 
 | Slot id | Page | Needs |
 |---|---|---|
-| `hf-hero-bg` | In-market | Hero background photo |
+| `hf-hero-bg` | In-market | Hero background photo. The **cold** hero is a real photo now, so this is the last hero placeholder left |
 | `cold-fac-1` / `hf-fac-1` | Both | Dr. Hoda Baytiyeh portrait |
 | `cold-fac-2` / `hf-fac-2` | Both | Dr. Mahmud Shihab portrait |
 | `cold-fac-3` / `hf-fac-3` | Both | Rayan Fayed portrait |
@@ -123,14 +167,17 @@ The repo is public, so `githack` serves these files as real HTML with no token.
 | In-market | `https://raw.githack.com/Think-Orion/landing-pages/claude/aub-fas-ma-computing-education-6bcyjd/AUB/FAS/online-ma-computing-in-education/In-Market_Hero_Form_dc.html` |
 | Thank you | `https://raw.githack.com/Think-Orion/landing-pages/claude/aub-fas-ma-computing-education-6bcyjd/AUB/FAS/online-ma-computing-in-education/Thank_You_dc.html` |
 
-**Pinned to commit `797755e`** — immutable and permanently cached, so it cannot
-shift under a reviewer mid-comment. Use when sending to the client.
+**Pinned to a commit** — immutable and permanently cached, so the page cannot shift
+under a reviewer mid-comment. Use when sending to the client. Swap the host and the
+branch segment for `rawcdn.githack.com` and the full commit SHA:
 
-| Page | URL |
-|---|---|
-| Cold audience | `https://rawcdn.githack.com/Think-Orion/landing-pages/797755e846367264b2160a5e156847057f58cb4c/AUB/FAS/online-ma-computing-in-education/Cold_Audience_dc.html` |
-| In-market | `https://rawcdn.githack.com/Think-Orion/landing-pages/797755e846367264b2160a5e156847057f58cb4c/AUB/FAS/online-ma-computing-in-education/In-Market_Hero_Form_dc.html` |
-| Thank you | `https://rawcdn.githack.com/Think-Orion/landing-pages/797755e846367264b2160a5e156847057f58cb4c/AUB/FAS/online-ma-computing-in-education/Thank_You_dc.html` |
+```
+https://rawcdn.githack.com/Think-Orion/landing-pages/<full-commit-sha>/AUB/FAS/online-ma-computing-in-education/<page>.html
+```
+
+Get the SHA with `git rev-parse HEAD`. Deliberately not hardcoded here — a pinned URL
+in a file that keeps changing goes stale the moment the next commit lands, and a stale
+pinned link is worse than none because it looks current.
 
 ### What a githack preview will not show
 
@@ -145,7 +192,8 @@ straight from a repo subfolder rather than from a real deployment.
   happy to see in the data.
 - **Faculty portraits and the in-market hero background are blank.** They are
   `image-slot` placeholders and `image-slot.js` is not in the repo, so they render
-  only inside the DC preview.
+  only inside the DC preview. The cold hero and the in-market Opportunity photos are
+  real `<picture>` elements on relative paths, so those **do** render in a preview.
 - **Favicons are absent.** The paths are root-relative by design, so `/favicon.ico`
   resolves to githack's root, not the repo subfolder. Verify on a real deployment.
 - **`support.js` 404s.** That is the DC preview harness. The standalone script at
@@ -187,31 +235,38 @@ Each page carries its own `CLIENT-FILL` comment block at the top. Consolidated:
 11. **Booking link** — the thank-you page points at the Online Education
     Bookings calendar. Confirm the correct calendar for this program and that the
     meeting length matches the "20-minute" wording.
-12. **Vala form embeds** — the DC runtime mounts `#vala-funnel`. The cold page has
-    two form locations (hero + advisor section); confirm whether the embed
-    supports a second instance or whether the advisor form should point at the
-    hero.
+12. **Vala form embed** — the DC runtime mounts `#vala-funnel`. Resolved: the cold
+    page has a single form (advisor section) since the hero form was removed, so
+    there is one mount and the two-instance question no longer applies.
 13. **MoE caveat** — wording mirrors the client-reviewed email sequence. Confirm
     it should appear on paid landing pages.
 
 ## QA status
 
-Chromium (Playwright), file:// loads, standalone behaviour script active.
+Chromium (Playwright), file:// loads, standalone behaviour script active. Re-run after
+the hero, Opportunity-image and FAQ changes.
 
 | Check | Result |
 |---|---|
 | Render 1440×900 | Pass — `scrollWidth == clientWidth` on all three pages |
 | Render 390×844 | Pass — `scrollWidth == clientWidth` on all three pages |
-| Console / page errors | None, excluding the expected missing `support.js` and `image-slot.js` in a raw file:// load |
+| Every `<img>` decodes | Pass — checked after a full scroll pass so `loading="lazy"` images actually fetch |
+| Responsive image negotiation | Pass — Chromium picks `hero-cold-elearning-800.avif` at 390px and `-1600.avif` at 1440px; `opportunity-coding-600.avif` at a 560px column |
+| No missing assets | Pass — no failed requests apart from the expected `support.js` / `image-slot.js` |
+| Hero copy contrast | Pass — body text ≥ 5.3:1 against the lightest pixel beneath it at 390, 820, 1024 and 1440 (AA floor is 4.5:1) |
+| Console / page errors | None |
 | HTML tag balance | Balanced on all three pages |
 | FAQ JSON-LD ↔ visible copy | 7/7 questions and 7/7 answers match byte-for-byte on both landing pages |
-| Cold ↔ in-market FAQ overlap | Zero |
+| Cold ↔ in-market FAQ sets | Identical by design, both pages `noindex` |
 | FAQ accordions | Expand and collapse, icon rotates, on both pages |
 | Curriculum accordions | 10 per page, expand on click |
 | Sticky CTA | Hidden over the hero, visible mid-page, hides again at the form — both pages |
-| Nav CTA | Brings the form into view on both pages (on the in-market page the form is in the hero, so the scroll goes up — correct) |
+| Nav CTA | Brings the form into view on both pages (in-market scrolls up, since its form is in the hero — correct) |
 | Testimonial slider | Fits at 1440 with arrows hidden; overflows and scrolls at 390 |
 | Thank-you page | Two booking links resolve; one `href="#"` placeholder remains, the factsheet download |
 
-Page heights: cold 8350px desktop / 13053px mobile; in-market 5020 / 7626;
+The comparison table is wider than a 390px viewport and scrolls inside its own
+`overflow-x` container. That is intended — the page itself does not scroll sideways.
+
+Page heights: cold 8290px desktop / 12585px mobile; in-market 5190 / 7938;
 thank you 2085 / 2388.
