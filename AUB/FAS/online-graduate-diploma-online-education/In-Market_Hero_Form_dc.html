@@ -19,10 +19,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AUB Graduate Diploma in Online Education — Apply Now</title>
   <meta name="description" content="AUB Graduate Diploma in Online Education. 12 credits, 4 courses, 100% online. $450 per credit. MCE certification included at no extra cost. Fall 2026 intake." />
-  <!-- Indexing: index,follow. This page carries its own FAQPage schema, deliberately a
-       DIFFERENT question set from the cold-audience page — duplicate FAQPage JSON-LD on
-       one domain splits search signals. The Thank You page must be noindex instead. -->
-  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <!-- ============================================================================
+       NOINDEX — per the client decision that these paid landing pages are not to be
+       crawled. This is also what makes it safe for this page to carry the SAME FAQ set
+       as the cold-audience page: duplicate FAQPage data only competes with itself if
+       both pages are indexed, and neither is. "follow" is kept so link equity still
+       flows to aub.edu.lb.
+       If this ever flips back to index, the two FAQ sets must be differentiated again.
+       ============================================================================ -->
+  <meta name="robots" content="noindex, follow" />
 
   <!-- ============================================================================
        CANONICAL — COMMENTED OUT ON PURPOSE. UNCOMMENT AND FILL BEFORE GOING LIVE.
@@ -91,68 +96,70 @@
     .jm:hover .jm-dot { background: #8B1333 !important; }
   </style>
 <!-- FAQPage structured data for search and answer engines; keep in sync with the visible FAQ text -->
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How much time does the program require each week?",
+      "name": "Do I need a tech background to apply?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most students in the AUB Graduate Diploma in Online Education spend 8 to 12 hours per week on coursework, including readings, asynchronous discussions, and assignments. The program is fully asynchronous, so you distribute those hours across the week in whatever pattern fits your teaching or work schedule."
+        "text": "No. The AUB Graduate Diploma in Online Education is an entry point into educational technology, built for educators without a coding or IT background. Technical skills are taught step by step, alongside the teaching skills, so you do not need them before you start."
       }
     },
     {
       "@type": "Question",
-      "name": "How is this different from a Coursera certificate?",
+      "name": "What do I need to apply?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The AUB Graduate Diploma in Online Education is a graduate-level academic credential, not a short course like a Coursera certificate. It carries NYSED recognition, transfers 12 credits into AUB’s MA in Computing in Education, and includes the MCE certification. If you are building a case for promotion, pivoting into instructional design, or planning a master’s degree, the diploma carries different weight in that conversation."
+        "text": "To apply for the Graduate Diploma in Online Education at AUB, you need a bachelor's degree with a minimum GPA of 3.0, an English proficiency test, and two recommendation letters. Graduates of all backgrounds and majors can apply. Work experience helps but is not required."
       }
     },
     {
       "@type": "Question",
-      "name": "Can I keep up if I come from a non-education background?",
+      "name": "Can I study while working full time?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. A meaningful proportion of students in the AUB diploma come from corporate training, HR, NGO work, and other adjacent fields. The program assumes professional maturity, not prior teaching credentials. No coding or IT background is required; the curriculum builds technical fluency step by step alongside instructional design."
+        "text": "Yes. The AUB diploma is 100% online and asynchronous, with no fixed class times, so it fits around a full-time job. Each of the 4 courses runs about seven weeks, and most weeks involve readings, a short task, and a piece of design work. You choose when the work happens."
       }
     },
     {
       "@type": "Question",
-      "name": "How is the diploma recognized internationally?",
+      "name": "How do I earn the Microsoft certification?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The American University of Beirut (AUB) awards the Graduate Diploma in Online Education, and it is recognized by the New York State Education Department (NYSED). This gives the diploma standing with international employers and institutions. For Lebanon-based applicants, the program is not currently accredited by the Lebanese Ministry of Education. An AUB advisor can explain what this means for your situation."
+        "text": "The Microsoft Certified Educator (MCE) preparation is built into the AUB diploma, and you earn the MCE certificate by the end of the program, at no extra cost."
       }
     },
     {
       "@type": "Question",
-      "name": "Do I have to continue to the master’s degree?",
+      "name": "How is the diploma recognized?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. The AUB Graduate Diploma in Online Education is a complete credential on its own. Some of our graduates choose to continue to the MA in Computing in Education with full credit transfer; the rest take the diploma and the MCE certification and apply them in their current or next role. You make that decision at the end of the diploma, not before you start."
+        "text": "The Graduate Diploma in Online Education is awarded by the American University of Beirut (AUB) and recognized by the New York State Education Department (NYSED), which gives it standing in the US and with international employers. One note for Lebanon-based applicants: the program is not currently accredited by the Lebanese Ministry of Education. An AUB advisor can explain what this means for your situation."
       }
     },
     {
       "@type": "Question",
-      "name": "How do I earn the MCE certification?",
+      "name": "What if I want to continue to a master’s?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The Microsoft Certified Educator (MCE) exam preparation is built into the AUB Graduate Diploma in Online Education coursework. You complete the preparation as part of your studies and earn the MCE certificate by the end of the program at no extra cost. MCE is a recognized industry credential that demonstrates practical, tool-level competencies in educational technology to employers and institutions."
+        "text": "All 12 diploma credits transfer directly into AUB’s MA in Computing in Education. Some of our graduates choose to continue, and the diploma is also a complete credential on its own. You decide at the end of the diploma, not before you start."
       }
     },
     {
       "@type": "Question",
-      "name": "What does the program cost, and is financial support available?",
+      "name": "What does it cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "The AUB Graduate Diploma in Online Education costs $5,400 in total — 12 credits at $450 each. Two discounts may apply: the Dean’s Scholarship takes 20% off for qualified applicants, and AUB alumni and staff receive 15%. Payment plans are also available, so the balance can be spread across the program rather than paid up front. If your employer funds professional development, AUB’s admissions team supplies the documentation your organization needs to sign off."
+        "text": "Tuition for the AUB Graduate Diploma in Online Education is $450 per credit, or $5,400 in total for the 12-credit program. The Dean’s Scholarship covers 20% for qualified applicants, AUB alumni and staff get 15% off, and payment plans are available. If your employer sponsors staff study, AUB’s admissions team can provide the documents you need."
       }
     }
   ]
-}</script>
+}
+</script>
 </helmet>
 
 <!-- Google Tag Manager (noscript) — must sit immediately after the opening <body> tag.
@@ -179,7 +186,10 @@
      Footer legal links added as placeholders (privacy, terms, non-discrimination) — link AUB's own existing policies
      Title tag had an internal "(Hero Form)" label that would have shown in search results; removed
      The cost FAQ answer was 93% identical to the cold page's, which splits search signals across two pages. Rewritten with the same approved figures ($450/credit, $5,400 total, 20% Dean's Scholarship, 15% alumni and staff, payment plans) but distinct wording. Visible copy and JSON-LD updated together
-     FAQ set is tailored for in-market (program-aware) readers and differs from the cold-audience page; MoE wording in the recognition FAQ mirrors the client-reviewed email sequence — confirm it should appear on paid landing pages
+     FAQ set is now IDENTICAL to the cold-audience page, per the client decision not to allow these pages to be crawled. Both pages are noindex, so duplicate FAQPage data cannot compete with itself. If either page is ever set to index, the sets must be differentiated again
+     The section heading stays "Your questions, answered." — the in-market page's own wording. Only the seven questions and answers were swapped
+     Credential Gap section now carries a photo (assets/credential-gap-*), lazy-loaded with explicit dimensions
+     PREVIOUS in-market-only FAQ set (replaced): weekly time commitment, Coursera comparison, non-education background, international recognition, master's optional, MCE, cost with financial support. Restore it if the page is ever indexed; MoE wording in the recognition FAQ mirrors the client-reviewed email sequence — confirm it should appear on paid landing pages
 -->
 <div style="width:100%;background:#fff;overflow-x:hidden">
 
@@ -304,6 +314,18 @@
       <div data-reveal>
         <p style="font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#8B1333;margin-bottom:16px">The Credential Gap</p>
         <h2 style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(24px,3.1vw,37px);font-weight:700;line-height:1.16;letter-spacing:-.7px;color:#171514;text-wrap:pretty">Your school is going digital. Are your qualifications keeping up?</h2>
+        <!-- Below the fold, so lazy with explicit width/height to reserve space and avoid
+             layout shift. Two widths x WebP/JPEG: the column is ~560px on desktop and ~354px
+             on mobile, so 1200 covers desktop at 2x and phones take the 600. -->
+        <picture>
+          <source type="image/webp" sizes="(min-width: 900px) 46vw, 92vw"
+                  srcset="assets/credential-gap-600.webp 600w, assets/credential-gap-1200.webp 1200w" />
+          <img src="assets/credential-gap-1200.jpg" sizes="(min-width: 900px) 46vw, 92vw"
+               srcset="assets/credential-gap-600.jpg 600w, assets/credential-gap-1200.jpg 1200w"
+               alt="An educator studying online at a laptop at home" loading="lazy" decoding="async"
+               width="1200" height="800"
+               style="width:100%;height:auto;display:block;border-radius:4px;margin-top:clamp(24px,3vw,32px)" />
+        </picture>
       </div>
       <div data-reveal>
         <div style="font-size:clamp(15px,1.5vw,16.5px);line-height:1.76;color:#45403D;max-width:60ch">
@@ -506,65 +528,65 @@
       <div style="display:flex;flex-direction:column;border-top:1px solid #E6E1DB">
         <div style="border-bottom:1px solid #E6E1DB">
           <button onClick="{{ toggleFaq }}" style="width:100%;background:none;border:none;padding:20px 0;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#171514;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.45" style-hover="color:#8B1333">
-            How much time does the program require each week?
+            Do I need a tech background to apply?
             <span data-faq-icon style="font-size:20px;font-weight:300;color:#8B1333;line-height:1;flex-shrink:0;transition:transform .25s">+</span>
           </button>
           <div data-faq-answer style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">Most students in the AUB Graduate Diploma in Online Education spend 8 to 12 hours per week on coursework, including readings, asynchronous discussions, and assignments. The program is fully asynchronous, so you distribute those hours across the week in whatever pattern fits your teaching or work schedule.</p>
+            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">No. The AUB Graduate Diploma in Online Education is an entry point into educational technology, built for educators without a coding or IT background. Technical skills are taught step by step, alongside the teaching skills, so you do not need them before you start.</p>
           </div>
         </div>
         <div style="border-bottom:1px solid #E6E1DB">
           <button onClick="{{ toggleFaq }}" style="width:100%;background:none;border:none;padding:20px 0;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#171514;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.45" style-hover="color:#8B1333">
-            How is this different from a Coursera certificate?
+            What do I need to apply?
             <span data-faq-icon style="font-size:20px;font-weight:300;color:#8B1333;line-height:1;flex-shrink:0;transition:transform .25s">+</span>
           </button>
           <div data-faq-answer style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">The AUB Graduate Diploma in Online Education is a graduate-level academic credential, not a short course like a Coursera certificate. It carries NYSED recognition, transfers 12 credits into AUB’s MA in Computing in Education, and includes the MCE certification. If you are building a case for promotion, pivoting into instructional design, or planning a master’s degree, the diploma carries different weight in that conversation.</p>
+            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">To apply for the Graduate Diploma in Online Education at AUB, you need a bachelor's degree with a minimum GPA of 3.0, an English proficiency test, and two recommendation letters. Graduates of all backgrounds and majors can apply. Work experience helps but is not required.</p>
           </div>
         </div>
         <div style="border-bottom:1px solid #E6E1DB">
           <button onClick="{{ toggleFaq }}" style="width:100%;background:none;border:none;padding:20px 0;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#171514;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.45" style-hover="color:#8B1333">
-            Can I keep up if I come from a non-education background?
+            Can I study while working full time?
             <span data-faq-icon style="font-size:20px;font-weight:300;color:#8B1333;line-height:1;flex-shrink:0;transition:transform .25s">+</span>
           </button>
           <div data-faq-answer style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">Yes. A meaningful proportion of students in the AUB diploma come from corporate training, HR, NGO work, and other adjacent fields. The program assumes professional maturity, not prior teaching credentials. No coding or IT background is required; the curriculum builds technical fluency step by step alongside instructional design.</p>
+            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">Yes. The AUB diploma is 100% online and asynchronous, with no fixed class times, so it fits around a full-time job. Each of the 4 courses runs about seven weeks, and most weeks involve readings, a short task, and a piece of design work. You choose when the work happens.</p>
           </div>
         </div>
         <div style="border-bottom:1px solid #E6E1DB">
           <button onClick="{{ toggleFaq }}" style="width:100%;background:none;border:none;padding:20px 0;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#171514;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.45" style-hover="color:#8B1333">
-            How is the diploma recognized internationally?
+            How do I earn the Microsoft certification?
             <span data-faq-icon style="font-size:20px;font-weight:300;color:#8B1333;line-height:1;flex-shrink:0;transition:transform .25s">+</span>
           </button>
           <div data-faq-answer style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <!-- MoE wording below mirrors the client-reviewed email sequence; confirm it should appear on paid landing pages. --><p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">The American University of Beirut (AUB) awards the Graduate Diploma in Online Education, and it is recognized by the New York State Education Department (NYSED). This gives the diploma standing with international employers and institutions. For Lebanon-based applicants, the program is not currently accredited by the Lebanese Ministry of Education. An AUB advisor can explain what this means for your situation.</p>
+            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">The Microsoft Certified Educator (MCE) preparation is built into the AUB diploma, and you earn the MCE certificate by the end of the program, at no extra cost.</p>
           </div>
         </div>
         <div style="border-bottom:1px solid #E6E1DB">
           <button onClick="{{ toggleFaq }}" style="width:100%;background:none;border:none;padding:20px 0;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#171514;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.45" style-hover="color:#8B1333">
-            Do I have to continue to the master’s degree?
+            How is the diploma recognized?
             <span data-faq-icon style="font-size:20px;font-weight:300;color:#8B1333;line-height:1;flex-shrink:0;transition:transform .25s">+</span>
           </button>
           <div data-faq-answer style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">No. The AUB Graduate Diploma in Online Education is a complete credential on its own. Some of our graduates choose to continue to the MA in Computing in Education with full credit transfer; the rest take the diploma and the MCE certification and apply them in their current or next role. You make that decision at the end of the diploma, not before you start.</p>
+            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch"><!-- MoE wording below mirrors the client-reviewed email sequence; confirm it should appear on paid landing pages. -->The Graduate Diploma in Online Education is awarded by the American University of Beirut (AUB) and recognized by the New York State Education Department (NYSED), which gives it standing in the US and with international employers. One note for Lebanon-based applicants: the program is not currently accredited by the Lebanese Ministry of Education. An AUB advisor can explain what this means for your situation.</p>
           </div>
         </div>
         <div style="border-bottom:1px solid #E6E1DB">
           <button onClick="{{ toggleFaq }}" style="width:100%;background:none;border:none;padding:20px 0;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#171514;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.45" style-hover="color:#8B1333">
-            How do I earn the MCE certification?
+            What if I want to continue to a master’s?
             <span data-faq-icon style="font-size:20px;font-weight:300;color:#8B1333;line-height:1;flex-shrink:0;transition:transform .25s">+</span>
           </button>
           <div data-faq-answer style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">The Microsoft Certified Educator (MCE) exam preparation is built into the AUB Graduate Diploma in Online Education coursework. You complete the preparation as part of your studies and earn the MCE certificate by the end of the program at no extra cost. MCE is a recognized industry credential that demonstrates practical, tool-level competencies in educational technology to employers and institutions.</p>
+            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">All 12 diploma credits transfer directly into AUB’s MA in Computing in Education. Some of our graduates choose to continue, and the diploma is also a complete credential on its own. You decide at the end of the diploma, not before you start.</p>
           </div>
         </div>
         <div style="border-bottom:1px solid #E6E1DB">
           <button onClick="{{ toggleFaq }}" style="width:100%;background:none;border:none;padding:20px 0;text-align:left;font-family:inherit;font-size:15px;font-weight:600;color:#171514;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;line-height:1.45" style-hover="color:#8B1333">
-            What does the program cost, and is financial support available?
+            What does it cost?
             <span data-faq-icon style="font-size:20px;font-weight:300;color:#8B1333;line-height:1;flex-shrink:0;transition:transform .25s">+</span>
           </button>
           <div data-faq-answer style="max-height:0;overflow:hidden;transition:max-height .3s ease">
-            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">The AUB Graduate Diploma in Online Education costs $5,400 in total — 12 credits at $450 each. Two discounts may apply: the Dean’s Scholarship takes 20% off for qualified applicants, and AUB alumni and staff receive 15%. Payment plans are also available, so the balance can be spread across the program rather than paid up front. If your employer funds professional development, AUB’s admissions team supplies the documentation your organization needs to sign off.</p>
+            <p style="font-size:14.5px;color:#45403D;line-height:1.76;padding-bottom:22px;max-width:60ch">Tuition for the AUB Graduate Diploma in Online Education is $450 per credit, or $5,400 in total for the 12-credit program. The Dean’s Scholarship covers 20% for qualified applicants, AUB alumni and staff get 15% off, and payment plans are available. If your employer sponsors staff study, AUB’s admissions team can provide the documents you need.</p>
           </div>
         </div>
       </div>

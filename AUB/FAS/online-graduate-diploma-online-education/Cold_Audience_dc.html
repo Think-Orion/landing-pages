@@ -20,10 +20,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AUB Graduate Diploma in Online Education — 100% Online</title>
   <meta name="description" content="Earn our Graduate Diploma in Online Education: 12 credits, 4 courses, 100% online. Includes the Microsoft Certified Educator certification at no extra cost." />
-  <!-- Indexing: this page carries its own FAQPage schema targeting cold-stage
-       long-tail queries, so it is meant to be indexed. The Thank You page must be
-       noindex instead. -->
-  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <!-- ============================================================================
+       NOINDEX — per the client decision that these paid landing pages are not to be
+       crawled. Consequence worth knowing: the FAQPage schema below is now inert, since
+       search engines will not index this page in order to use it. It is left in place so
+       nothing has to be rebuilt if that decision is reversed, and because it costs
+       nothing. It is also what makes it safe for the in-market page to carry the SAME
+       FAQ set. "follow" is kept so link equity still flows to aub.edu.lb.
+       ============================================================================ -->
+  <meta name="robots" content="noindex, follow" />
   <!-- ============================================================================
        CANONICAL — COMMENTED OUT ON PURPOSE. UNCOMMENT AND FILL BEFORE GOING LIVE.
        The live URL is not known at handoff. A canonical tag pointing at a literal
@@ -144,7 +149,7 @@
      Confirm with Manno that DC emits the GTM <noscript> iframe inside <body> and does not hoist it into the head
      Consent Mode v2 is still unconfirmed. It is handled in the server-side container, not on the page — confirm with AUB ops before running EEA traffic
      No dataLayer event fires on form submit yet, because the lead form is still a static mockup with no <form> tag. Wire the conversion event when the live Vala embed goes in — ask ops for the expected event name and parameters
-     robots is set to index,follow on this page. The Thank You page must be noindex,follow instead
+     robots is noindex,follow on ALL THREE pages, per the client decision not to allow these paid pages to be crawled. The FAQPage schema is therefore inert but left in place, and the in-market page now carries an identical FAQ set — only safe because neither landing page is indexed. If either is ever set to index, the two FAQ sets must be differentiated again
      Duplicate viewport meta: one sits in the outer <head> next to support.js (DC preview harness), one in <helmet> (the production head). Confirm with Manno which one ships before deleting either — removing the wrong one breaks the DC preview
      Both photos are still data URIs. Decoded files are extracted to assets/ ready to upload; swap the two src values to hosted URLs to drop ~81KB (52%) from this file
      Both form cards contain a static lead-form mockup (first/last name, email, phone with dial code, contact preference, bachelor's yes/no) — replace with the live Vala embed or wire via DC

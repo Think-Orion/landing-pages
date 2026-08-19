@@ -6,14 +6,20 @@ Landing pages for this program. Assets in `assets/` are shared across all three.
 
 | Page | File | Status | Indexing |
 |---|---|---|---|
-| Cold audience | `Cold_Audience_dc.html` | ✅ built | `index, follow` |
-| In-market hero form | `In-Market_Hero_Form_dc.html` | ✅ built | `index, follow` |
+| Cold audience | `Cold_Audience_dc.html` | ✅ built | **`noindex, follow`** |
+| In-market hero form | `In-Market_Hero_Form_dc.html` | ✅ built | **`noindex, follow`** |
 | Thank you | `Thank_You_dc.html` | ✅ built | **`noindex, follow`** |
 
-Cold and in-market pages must not share an FAQ set — duplicate `FAQPage` JSON-LD on
-one domain splits search signals. Both carry 7 questions with no overlapping question
-strings and no identical answers; highest answer similarity between the two pages is
-0.67 (the recognition answers, which differ in framing).
+**All three pages are `noindex, follow`** per the client decision not to allow these paid pages
+to be crawled. That reverses the earlier constraint: the two landing pages now carry an
+**identical** seven-question FAQ set, which is safe precisely because neither is indexed, so
+duplicate `FAQPage` data cannot compete with itself.
+
+The `FAQPage` schema is therefore inert on both, and left in place only so nothing needs
+rebuilding if the decision reverses. **If either page is ever set to index, the FAQ sets must be
+differentiated again** — the in-market page's previous program-aware set is recorded in its
+client-fill comment block. Canonical also stops being load-bearing on unindexed pages, though
+`og:image` still matters because social crawlers are not search crawlers.
 
 ---
 
@@ -67,6 +73,9 @@ Differences worth knowing:
   and all four faculty portraits are `image-slot` placeholders, so there is nothing to lazy
   load. 56KB before the pass, 63KB after, with no embedded images.
 - **One Vala mount** (`#vala-funnel`) rather than the cold page's two.
+- **Credential Gap photo** — `assets/credential-gap-*`, client image 1 cropped 4:3 → 3:2 and
+  exported at two widths in WebP and JPEG (65KB / 24KB WebP, from a 4.4MB source PNG). Sits
+  below the section H2, lazy-loaded with explicit `width`/`height` to reserve space.
 - **Five `image-slot` placeholders**, not four — the hero background is one of them, so in
   a raw browser the hero shows only its dark gradient with no photo behind it.
 - **No footer padding needed.** This page's sticky-CTA logic already hides the bar when the

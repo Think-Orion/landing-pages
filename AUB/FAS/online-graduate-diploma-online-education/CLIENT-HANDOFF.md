@@ -43,7 +43,9 @@ None of these are technical. Each one is currently a visible gap on the page.
       *Right now these spaces are blank on the live page.*
 - [ ] **Four short faculty biographies**, two or three lines each.
 - [ ] **A hero photograph for the in-market page** — a wide image of an educator teaching an
-      online class. *Right now that page's header is a plain dark panel with no photo.*
+      online class. *Right now that page's header is a plain dark panel with no photo.* The
+      cold-audience hero and the in-market Credential Gap photo are both done, using images
+      you supplied.
 - [ ] **One or two graduate testimonials**, each with a name and a job title.
       **These must not go live as they are** — they currently read
       "[TESTIMONIAL — student quote to be supplied by AUB]" and would publish as that text.
@@ -149,8 +151,9 @@ checked any earlier, which is why they are separated out.
 
 ### Search
 
-- [ ] **Confirm the thank-you page is hidden from search engines.** We have instructed search
-      engines not to list it, but that can only be verified once it is live.
+- [ ] **Confirm all three pages are hidden from search engines.** Per your decision, none of
+      these pages should be listed in Google, so all three now instruct search engines not to
+      index them. This can only be verified once they are live.
 - [ ] **Confirm each page's official web address is set** once you know the final addresses.
       *Technical detail in `DEPLOY.md`; your web team will recognise it.*
 
@@ -163,9 +166,12 @@ If something here looks like a mistake, it is deliberate. Ask us before editing.
 - **The tracking code.** Your operations team supplied it with the instruction "do not modify
   this code". It looks unusual because it deliberately loads from an AUB web address rather
   than Google's, so ad-blockers do not interfere with it. Reformatting it breaks it.
-- **The thank-you page being hidden from search engines.** This is intentional. If it were
-  listed, it would appear in searches for AUB and would inflate your enquiry numbers with
-  people who never filled in the form.
+- **All three pages being hidden from search engines.** This is your decision, applied
+  deliberately. For the thank-you page it also stops your enquiry numbers being inflated by
+  people who never filled in the form. One consequence to be aware of: because the pages are
+  not indexed, the two landing pages now share the same set of frequently asked questions. If
+  anyone later decides these pages *should* appear in Google, tell us first — the two FAQ sets
+  have to be made different again, or the pages will compete with each other.
 - **The thank-you page having no sharing image or preview.** Also intentional. It is a private
   confirmation screen, not something to be shared.
 - **The factsheet file we supplied.** It is the compressed version. The original 22MB file is

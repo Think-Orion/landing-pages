@@ -18,6 +18,7 @@ Applies to **all three pages** unless noted.
 | `assets/favicon/*` | **Web root** of the serving domain — not next to the page |
 | `assets/og-image-1200x630.jpg` | Host it — the social sharing image for both landing pages |
 | `assets/hero-online-educator-{960,1920}.{webp,jpg}` | Host all four — the cold page's hero, served responsively |
+| `assets/credential-gap-{600,1200}.{webp,jpg}` | Host all four — the in-market Credential Gap photo |
 | `assets/premise-educator-mce-badge-800x800.jpg` | Optional: host it and swap the data URI (see §5) |
 | `assets/advisor-mike-220x211.jpg` | Optional: same |
 
@@ -47,10 +48,21 @@ need changing.
 
 ---
 
-## 3. Canonical, og:url, og:image — BLOCKING before launch
+## 3. Canonical, og:url, og:image — before launch
 
-**Landing pages only.** The thank-you page deliberately has no canonical and no Open Graph
-tags — see §10.
+**All three pages are now `noindex, follow`** per the client decision not to allow these paid
+pages to be crawled. Two consequences:
+
+- **Canonical is no longer load-bearing.** A canonical tag only matters to a page that gets
+  indexed, and none of these do. The tags stay commented out; filling them is now optional
+  tidiness rather than a launch blocker.
+- **The `FAQPage` schema on both landing pages is inert.** It is left in place so nothing has
+  to be rebuilt if the decision reverses, and because it costs nothing.
+
+`og:image` still matters — social crawlers are not search crawlers, and link previews work
+regardless of `noindex`. That one is worth filling.
+
+The thank-you page has no canonical and no Open Graph tags at all — see §10.
 
 Four tags are **commented out** in the `<head>` because the live URL was unknown at
 handoff. Search for `REPLACE-WITH-LIVE-URL` in the HTML. Uncomment each and fill in:
@@ -168,6 +180,11 @@ it in GTM preview mode before the campaigns go live.
 - **MCE badge** — confirm Microsoft brand-usage approval.
 - **Lebanese MoE recognition wording** in the FAQ mirrors the client-reviewed email
   sequence. Confirm it belongs on a paid landing page.
+- **Both landing pages now carry an identical seven-question FAQ set.** That is only safe
+  because both are `noindex`. **If either page is ever set to index, the two sets must be
+  differentiated again** or the pages will compete with each other for the same queries. The
+  in-market page's previous, program-aware set is recorded in its client-fill comment block so
+  it can be restored.
 
 ---
 
