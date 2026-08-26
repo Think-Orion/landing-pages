@@ -38,7 +38,7 @@ off. See "Cold hero", "In-market Opportunity section", "FAQs" and "Assets".
 | Admissions | Bachelor's (any field) from a recognized institution, min GPA 3.0, English proficiency, two recommendation letters | Factsheet + approved diploma builds |
 | Diploma pathway | All 12 Graduate Diploma in Online Education credits transfer into this MA | Factsheet, footnote ** |
 | Waivers | Students with an education or computer science background can apply to have credits waived | Factsheet, footnote * |
-| Intake | Fall 2026 | Approved diploma builds |
+| Intake | Fall 2026–2027 | AUB review round — was "Fall 2026" |
 | Advisor | Mike (Mike Wakim), Online Program Recruiter | Factsheet contact block |
 
 ### Credit maths
@@ -99,7 +99,7 @@ labels, not FAQ content.
 
 The hero no longer carries a lead form. It is a full-bleed photo with the headline,
 description, a single **Speak to an Advisor** CTA and the three-stat strip, and the
-eyebrow pill ("Now Enrolling · Fall 2026") is gone.
+eyebrow pill ("Now Enrolling · Fall 2026–2027") is gone.
 
 Consequences worth knowing:
 
@@ -118,17 +118,14 @@ Consequences worth knowing:
   is the first explanatory block below the hero, carries the classroom/MCE photo, and
   makes the same education-plus-computer-science argument.
 - **The nav button and sticky bar still resolve to `#form`.**
-- **The nav and sticky CTAs still read "Chat to an Advisor".** Left as-is: the skill's
-  house style for the cold page is "Chat to an Advisor" throughout, and the variation
-  avoids showing one phrase three times in a viewport. Say the word if you want all
-  three aligned to "Speak to an Advisor".
+- **The nav and sticky CTAs read "Chat with an Advisor".** AUB asked for "with" in place
+  of "to" on the nav button; the sticky bar was changed to match, since leaving the two
+  phrasings side by side on one page would read as an oversight. The hero primary stays
+  "Speak to an Advisor", so no single phrase appears three times in a viewport.
 - **The scrim is tuned, not eyeballed.** Its gradient stops are anchored in pixels
   rather than percentages, because the copy column is a fixed 680px while a percentage
   gradient tracks the viewport — that mismatch put the copy over the light end of the
-  wash at tablet widths. Measured against the lightest pixel under the copy, body text
-  lands at 9.3:1 (390px), 7.1:1 (820px) and 5.3:1 (1440px), all clear of the 4.5:1 AA
-  floor. It is the lightest wash that holds that margin; anything lighter dipped under
-  4.5:1 at desktop, anything heavier buried the photo.
+  wash at tablet widths. Current measurements are under "Hero text contrast" below.
 
 ## In-market Opportunity section
 
@@ -140,6 +137,45 @@ giving heading → photo → copy → facts in DOM order with no leftover offset
 
 Verified: photo top and copy top differ by **0px** at 900, 1024, 1280 and 1440, and the
 section stacks cleanly at 390 and 768.
+
+## Hero text contrast
+
+AUB reported the white hero copy as "faded" and "not easily legible" on both landing
+pages, naming the sub-headings and the small labels under the cold hero's numbers.
+
+Two changes, no new images:
+
+1. **The copy is solid white, not translucent.** Every flagged element was drawing at
+   partial opacity — the cold sub-heading at 88%, its stat labels at 66%, the in-market
+   sub-heading at 76% and its benefit bullets at 90%. All are now `#fff`, with a soft
+   `text-shadow` so the type lifts off the busier parts of the photo. The stat labels
+   keep their place in the hierarchy through size, uppercase and letter-spacing rather
+   than through being dimmed, which is what made them look washed out.
+2. **The cold scrim went up a notch** — roughly 6% darker at the lightest pixel under
+   the copy. Enough to carry the sub-heading over the AAA line, small enough that the
+   photo still reads.
+
+Measured against the lightest pixel directly beneath each element:
+
+| Element | Before | After |
+|---|--:|--:|
+| Cold sub-heading, 1440 | 5.49:1 | **7.18:1** |
+| Cold sub-heading, 390 | 9.27:1 | **12.62:1** |
+| Cold stat labels, 1440 | 6.25:1 | **13.32:1** |
+| Cold stat labels, 390 | 6.76:1 | **14.56:1** |
+| In-market sub-heading, 1440 | 10.74:1 | **18.16:1** |
+| In-market sub-heading, 390 | 10.28:1 | **17.23:1** |
+| In-market bullets, 1440 | 14.77:1 | **18.15:1** |
+| In-market bullets, 390 | 14.01:1 | **17.17:1** |
+
+Everything now clears **AAA (7:1)**; the AA floor is 4.5:1. The figures ignore the
+`text-shadow`, so perceived legibility is a little better than the numbers suggest.
+
+Also lifted while in there, same faded-white problem in the same viewport: the
+in-market dark nav's "Faculty of Arts and Sciences" (75% → 94%) and its intake label
+(60% → 92%), the line under the in-market form (55% → 90%), and the hero divider rules
+on both pages. The journey accordions further down the in-market page keep their
+original dividers — they sit on solid dark, not on a photo.
 
 ## Assets
 
@@ -251,7 +287,9 @@ Each page carries its own `CLIENT-FILL` comment block at the top. Consolidated:
 8. **Faculty bios** — four named faculty, all bios `[BRACKETED]`. Instructor
    attribution in the cold curriculum cards covers `EDUC 371`–`374` only;
    instructors for the remaining courses and the capstone are outstanding.
-9. **Intake** — "Fall 2026" mirrors the approved builds. Confirm the date.
+9. **Intake** — now "Fall 2026–2027", set in an AUB review round. Rendered with an en
+    dash to match the other ranges on the page ("1.5–2 years"); the request was written
+    with a hyphen. Say the word if a literal hyphen is wanted.
 10. **Factsheet download** — the thank-you page's download button is `href="#"`
     pending a hosted URL for the PDF in `assets/`.
 11. **Booking link** — the thank-you page points at the Online Education
@@ -275,7 +313,7 @@ the hero, Opportunity-image and FAQ changes.
 | Every `<img>` decodes | Pass — checked after a full scroll pass so `loading="lazy"` images actually fetch |
 | Responsive image negotiation | Pass — Chromium picks `hero-cold-elearning-800.avif` at 390px and `-1600.avif` at 1440px; `opportunity-coding-600.avif` at a 560px column |
 | No missing assets | Pass — no failed requests apart from the expected `support.js` / `image-slot.js` |
-| Hero copy contrast | Pass — body text ≥ 5.3:1 against the lightest pixel beneath it at 390, 820, 1024 and 1440 (AA floor is 4.5:1) |
+| Hero text contrast | Pass — **every hero text element on both pages clears WCAG AAA (7:1)**, measured against the lightest pixel directly beneath it at 1440 and 390. Weakest is the cold sub-heading at 7.18:1 |
 | Hero secondary CTA | Pass — renders white, label correct, click lands on `#how-it-works` with the heading clear of the top, arrow nudges on hover, and the primary CTA still reaches `#form`. Checked at 1440 and 390 |
 | Opportunity alignment | Pass — photo top and copy top differ by 0px at 900, 1024, 1280 and 1440; stacks in DOM order at 390 and 768 |
 | Console / page errors | None |
