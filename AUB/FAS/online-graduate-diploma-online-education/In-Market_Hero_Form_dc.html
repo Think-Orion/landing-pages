@@ -98,6 +98,11 @@
        soft shadow holds the letterforms wherever the image runs light. Client feedback was
        that the sub-heading and small white text read as faded. */
     #hf-hero h1, #hf-hero p, #hf-hero li, #hf-hero button { text-shadow: 0 1px 3px rgba(0,0,0,.55); }
+    /* ...but never inside the white form card. The shadow exists to hold light type over a
+       photograph; on dark text on white it just reads as a smudge. Scoped to the card rather
+       than to #form, because "Scholarships, discounts, and payment plans available." sits
+       inside #form but outside the card, on the dark background, and does need the shadow. */
+    #hf-hero .hf-card, #hf-hero .hf-card * { text-shadow: none; }
   </style>
 <!-- FAQPage structured data for search and answer engines; keep in sync with the visible FAQ text -->
 <script type="application/ld+json">
@@ -182,7 +187,7 @@
      The form card contains a static lead-form mockup (first/last name, email, phone with dial code, contact preference, bachelor's yes/no) — replace with the live Vala embed or wire via DC
      Hero background is an image-slot placeholder (renders only in the DC preview) — supply and host the photo at launch
      A standalone script before </body> replicates sticky/FAQ/CTA behavior for review outside the DC runtime — remove it once DC wiring is live
-     AUB feedback applied: nav CTA reads "Chat with an Advisor"; intake label is "Fall 2026-2027"; hero white text raised for contrast — sub-heading and bullets to solid white, nav intake label 60% to 88%, sub-form line 55% to 85%, plus a soft text-shadow on hero type and a slightly darker diagonal overlay. These passed WCAG AA already against today's flat dark panel, but this hero's photo is still an image-slot placeholder — once a real photograph is behind the type those margins shrink, so the change is protective as well as cosmetic
+     AUB feedback applied: nav CTA reads "Chat with an Advisor"; intake label is "Fall 2026-2027"; hero white text raised for contrast — sub-heading and bullets to solid white, nav intake label 60% to 88%, sub-form line 55% to 85%, plus a soft text-shadow on hero type (scoped OFF the white form card, where a dark shadow on dark text just reads as a smudge — note "Scholarships, discounts..." sits inside #form but outside the card and keeps its shadow) and a slightly darker diagonal overlay. These passed WCAG AA already against today's flat dark panel, but this hero's photo is still an image-slot placeholder — once a real photograph is behind the type those margins shrink, so the change is protective as well as cosmetic
      Head tags added: robots index,follow; favicon links (root-relative, deploy to web root); OG and Twitter card. canonical, og:url, og:image and twitter:image are COMMENTED OUT pending the live URL — see DEPLOY.md
      GTM is live: Stape server-side container GTM-KZDZDJJ, loaded first-party from trk.aub.edu.lb. Pasted verbatim per AUB ops ("do not modify this code")
      Confirm with Manno that DC emits the GTM <noscript> iframe inside <body> and does not hoist it into the head
@@ -268,7 +273,7 @@
       </div>
 
       <div id="form" style="scroll-margin-top:84px">
-        <div style="background:#fff;border-top:3px solid #8B1333;box-shadow:0 28px 70px rgba(0,0,0,.45);padding:clamp(20px,2.6vw,28px);min-height:300px">
+        <div class="hf-card" style="background:#fff;border-top:3px solid #8B1333;box-shadow:0 28px 70px rgba(0,0,0,.45);padding:clamp(20px,2.6vw,28px);min-height:300px">
           <div style="padding-bottom:16px;margin-bottom:18px;border-bottom:1px solid #E6E1DB">
             <p style="font-size:17px;font-weight:700;color:#171514;letter-spacing:-.2px">Talk to an advisor</p>
             <p style="font-size:12.5px;color:#7A736F;margin-top:4px">Your AUB diploma and the MCE certificate, for $5,400 in total.</p>
