@@ -251,7 +251,35 @@ render only inside the DC preview:
 Replace each `<image-slot>` with a plain `<img>` once the real photo exists — `image-slot`
 elements are invisible in a raw browser.
 
-### Handoff
+### AUB review round — applied
+
+- Nav and FAQ CTA changed from "Chat to an Advisor" to **"Chat with an Advisor"** on both
+  landing pages. Kept in the design's existing Title Case; the feedback was written lowercase,
+  so say if you want `Chat with an advisor` instead.
+- Intake label changed from "Fall 2026" to **"Fall 2026-2027"** everywhere it appears across
+  all three pages, including the in-market meta description and every sticky bar.
+- **Hero contrast raised** on both landing pages after the client reported the white text
+  looked faded. Measured rather than eyeballed — rendering each hero with the text hidden,
+  sampling the actual backdrop pixels behind every string, and computing the ratio against the
+  90th-percentile lightest pixel (worst case for white type):
+
+  | Element | Before | After |
+  |---|--:|--:|
+  | Cold sub-heading | 8.8 | **14.5** |
+  | Cold stat labels (`per credit hour` etc.) | 6.7–7.3 | **14.5–16.6** |
+  | Cold scroll cue | 6.5 | **12.4** |
+  | In-market sub-heading | 10.8 | **18.2** |
+  | In-market hero bullets | 14.9 | **18.2** |
+  | In-market sub-form line | 6.0 | **12.9** |
+
+  Every one of these already passed WCAG AA before the change — AA is a floor, not a target,
+  and the client was right that they read faded. Changes: sub-headings and bullets to solid
+  white, small labels from 60% to 92% at weight 600, a soft `text-shadow` on all hero type, and
+  the cold scrim raised 58% → 64%. The text-shadow matters most on the **in-market** hero,
+  whose photo is still an image-slot placeholder: today the type sits on a flat dark panel, so
+  those ratios will drop once a real photograph is behind it.
+
+## Handoff
 
 Two documents, two audiences:
 

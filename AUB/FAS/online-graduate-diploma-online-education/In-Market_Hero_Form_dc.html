@@ -18,7 +18,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AUB Graduate Diploma in Online Education — Apply Now</title>
-  <meta name="description" content="AUB Graduate Diploma in Online Education. 12 credits, 4 courses, 100% online. $450 per credit. MCE certification included at no extra cost. Fall 2026 intake." />
+  <meta name="description" content="AUB Graduate Diploma in Online Education. 12 credits, 4 courses, 100% online. $450 per credit. MCE certification included at no extra cost. Fall 2026-2027 intake." />
   <!-- ============================================================================
        NOINDEX — per the client decision that these paid landing pages are not to be
        crawled. This is also what makes it safe for this page to carry the SAME FAQ set
@@ -94,6 +94,10 @@
     .jm .jm-title, .jm .jm-dot { transition: color .2s ease, background-color .2s ease; }
     .jm:hover .jm-title { color: #8B1333 !important; }
     .jm:hover .jm-dot { background: #8B1333 !important; }
+    /* Hero type sits over a photograph (an image-slot placeholder until AUB supply it), so a
+       soft shadow holds the letterforms wherever the image runs light. Client feedback was
+       that the sub-heading and small white text read as faded. */
+    #hf-hero h1, #hf-hero p, #hf-hero li, #hf-hero button { text-shadow: 0 1px 3px rgba(0,0,0,.55); }
   </style>
 <!-- FAQPage structured data for search and answer engines; keep in sync with the visible FAQ text -->
 <script type="application/ld+json">
@@ -170,7 +174,7 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <!-- CLIENT-FILL ITEMS — Graduate Diploma in Online Education (In-Market Hero Form page):
-     Intake shown as Fall 2026 — confirm the diploma semester start date before launch (AUB pages can show stale years)
+     Intake shown as Fall 2026-2027 per AUB feedback — confirm the diploma semester start date before launch (AUB pages can show stale years)
      Faculty names and courses are from client materials; [Short bio] lines and portraits to be supplied by AUB
      [TESTIMONIAL / NAME / ROLE] — all quote blocks are placeholders with suggested angles
      Comparison-table figures for non-AUB categories are indicative ranges; validate before publishing
@@ -178,6 +182,7 @@
      The form card contains a static lead-form mockup (first/last name, email, phone with dial code, contact preference, bachelor's yes/no) — replace with the live Vala embed or wire via DC
      Hero background is an image-slot placeholder (renders only in the DC preview) — supply and host the photo at launch
      A standalone script before </body> replicates sticky/FAQ/CTA behavior for review outside the DC runtime — remove it once DC wiring is live
+     AUB feedback applied: nav CTA reads "Chat with an Advisor"; intake label is "Fall 2026-2027"; hero white text raised for contrast — sub-heading and bullets to solid white, nav intake label 60% to 88%, sub-form line 55% to 85%, plus a soft text-shadow on hero type and a slightly darker diagonal overlay. These passed WCAG AA already against today's flat dark panel, but this hero's photo is still an image-slot placeholder — once a real photograph is behind the type those margins shrink, so the change is protective as well as cosmetic
      Head tags added: robots index,follow; favicon links (root-relative, deploy to web root); OG and Twitter card. canonical, og:url, og:image and twitter:image are COMMENTED OUT pending the live URL — see DEPLOY.md
      GTM is live: Stape server-side container GTM-KZDZDJJ, loaded first-party from trk.aub.edu.lb. Pasted verbatim per AUB ops ("do not modify this code")
      Confirm with Manno that DC emits the GTM <noscript> iframe inside <body> and does not hoist it into the head
@@ -215,45 +220,45 @@
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:18px">
-        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,.6)">Fall 2026 intake open</span>
+        <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,.88)">Fall 2026-2027 intake open</span>
         <button onClick="{{ scrollToForm }}" style="background:#8B1333;color:#fff;font-size:13px;font-weight:700;letter-spacing:.2px;padding:11px 24px;border-radius:6px;border:none;white-space:nowrap;transition:background .2s" style-hover="background:#A81A42">Apply Now</button>
       </div>
     </div>
   </nav>
 
-  <section style="position:relative;background:#171514;color:#fff;overflow:hidden">
+  <section id="hf-hero" style="position:relative;background:#171514;color:#fff;overflow:hidden">
     <div style="position:absolute;inset:0;opacity:.28">
       <image-slot id="hf-hero-bg" shape="rect" src="./dummy/hero-bg-dark.png" placeholder="Wide photo of an educator teaching a live online class — used as hero background"></image-slot>
     </div>
-    <div style="position:absolute;inset:0;background:linear-gradient(100deg,#171514 8%,rgba(23,21,20,.86) 46%,rgba(94,12,34,.72) 100%);pointer-events:none"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,#171514 8%,rgba(23,21,20,.90) 46%,rgba(94,12,34,.80) 100%);pointer-events:none"></div>
     <div style="position:relative;max-width:1180px;margin-inline:auto;padding:clamp(36px,5vw,72px) clamp(18px,4vw,44px) clamp(40px,6vw,80px);display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:clamp(30px,4vw,60px);align-items:start">
       <div>
         <div style="display:inline-flex;align-items:center;gap:9px;font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#F0BECC;border:1px solid rgba(240,190,204,.35);padding:7px 13px;border-radius:3px;margin-bottom:clamp(20px,2.6vw,28px)">
           <span style="width:5px;height:5px;border-radius:50%;background:#F0BECC;display:block"></span>
-          Now Enrolling · Fall 2026
+          Now Enrolling · Fall 2026-2027
         </div>
         <h1 style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(30px,4.4vw,52px);font-weight:700;line-height:1.05;letter-spacing:-1.2px;color:#fff;margin-bottom:20px;text-wrap:pretty">Become a <em style="font-style:italic;color:#F0BECC">certified</em><br />online educator.</h1>
-        <p style="font-size:clamp(15px,1.6vw,17.5px);line-height:1.7;color:rgba(255,255,255,.76);max-width:52ch;margin-bottom:clamp(24px,3vw,32px);font-weight:300">Graduate in nine months with two credentials: an AUB diploma and the Microsoft Certified Educator (MCE) certificate, included at no extra cost.</p>
+        <p style="font-size:clamp(15px,1.6vw,17.5px);line-height:1.7;color:#fff;max-width:52ch;margin-bottom:clamp(24px,3vw,32px);font-weight:300">Graduate in nine months with two credentials: an AUB diploma and the Microsoft Certified Educator (MCE) certificate, included at no extra cost.</p>
         <ul style="list-style:none;display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,.18)">
-          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:rgba(255,255,255,.9);line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
+          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:#fff;line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
             <span style="width:18px;height:18px;border-radius:50%;background:rgba(240,190,204,.16);display:grid;place-items:center;flex-shrink:0;margin-top:1px">
               <svg viewBox="0 0 12 10" style="width:9px;height:8px;stroke:#F0BECC;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="1.5 5 4.5 8 10.5 2"></polyline></svg>
             </span>
             MCE exam preparation built into the coursework
           </li>
-          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:rgba(255,255,255,.9);line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
+          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:#fff;line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
             <span style="width:18px;height:18px;border-radius:50%;background:rgba(240,190,204,.16);display:grid;place-items:center;flex-shrink:0;margin-top:1px">
               <svg viewBox="0 0 12 10" style="width:9px;height:8px;stroke:#F0BECC;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="1.5 5 4.5 8 10.5 2"></polyline></svg>
             </span>
             NYSED-recognized credential from AUB
           </li>
-          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:rgba(255,255,255,.9);line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
+          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:#fff;line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
             <span style="width:18px;height:18px;border-radius:50%;background:rgba(240,190,204,.16);display:grid;place-items:center;flex-shrink:0;margin-top:1px">
               <svg viewBox="0 0 12 10" style="width:9px;height:8px;stroke:#F0BECC;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="1.5 5 4.5 8 10.5 2"></polyline></svg>
             </span>
             $5,400 total · scholarships and payment plans available
           </li>
-          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:rgba(255,255,255,.9);line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
+          <li style="display:flex;align-items:flex-start;gap:13px;font-size:14.5px;color:#fff;line-height:1.5;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18)">
             <span style="width:18px;height:18px;border-radius:50%;background:rgba(240,190,204,.16);display:grid;place-items:center;flex-shrink:0;margin-top:1px">
               <svg viewBox="0 0 12 10" style="width:9px;height:8px;stroke:#F0BECC;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="1.5 5 4.5 8 10.5 2"></polyline></svg>
             </span>
@@ -295,7 +300,7 @@
           </div>
           <div id="vala-funnel"></div>
         </div>
-        <p style="text-align:center;font-size:11.5px;color:rgba(255,255,255,.55);margin-top:12px">Scholarships, discounts, and payment plans available.</p>
+        <p style="text-align:center;font-size:11.5px;color:rgba(255,255,255,.85);margin-top:12px">Scholarships, discounts, and payment plans available.</p>
       </div>
     </div>
   </section>
@@ -523,7 +528,7 @@
       <div>
         <p style="font-size:10.5px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:#8B1333;margin-bottom:16px">Common Questions</p>
         <h2 style="font-family:'Libre Franklin',system-ui,sans-serif;font-size:clamp(24px,3.1vw,37px);font-weight:700;line-height:1.16;letter-spacing:-.7px;color:#171514;margin-bottom:24px;text-wrap:pretty">Your questions, answered.</h2>
-        <button onClick="{{ scrollToForm }}" style="background:#8B1333;color:#fff;font-size:14px;font-weight:700;padding:14px 26px;border:none;border-radius:6px;letter-spacing:.2px;transition:background .2s" style-hover="background:#6B0F27">Chat to an Advisor</button>
+        <button onClick="{{ scrollToForm }}" style="background:#8B1333;color:#fff;font-size:14px;font-weight:700;padding:14px 26px;border:none;border-radius:6px;letter-spacing:.2px;transition:background .2s" style-hover="background:#6B0F27">Chat with an Advisor</button>
       </div>
       <div style="display:flex;flex-direction:column;border-top:1px solid #E6E1DB">
         <div style="border-bottom:1px solid #E6E1DB">
@@ -611,7 +616,7 @@
   <div data-sticky-cta style="position:fixed;bottom:0;left:0;right:0;z-index:200;background:#fff;border-top:1px solid #E6E1DB;padding:12px clamp(16px,4vw,32px);display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 -6px 24px rgba(0,0,0,.1);transform:translateY(110%);transition:transform .3s ease">
     <div style="line-height:1.35">
       <strong style="display:block;font-size:13.5px;font-weight:700;color:#171514">Graduate Diploma in Online Education</strong>
-      <span style="font-size:11.5px;color:#7A736F">$450/credit · 100% Online · Fall 2026</span>
+      <span style="font-size:11.5px;color:#7A736F">$450/credit · 100% Online · Fall 2026-2027</span>
     </div>
     <button onClick="{{ scrollToForm }}" style="background:#8B1333;color:#fff;font-size:13px;font-weight:700;padding:12px 22px;border-radius:6px;border:none;white-space:nowrap">Apply Now</button>
   </div>
